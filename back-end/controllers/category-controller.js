@@ -26,8 +26,8 @@ const updateCategory = async (req, res) => {
   res.status(200).json({ message: "Update category success", user: data });
 };
 const deleteCategory = async (req, res) => {
-  const { uid } = req.params;
-  const data = await sql`DELETE FROM users WHERE uid=${uid}`;
+  const { id } = req.params;
+  const data = await sql`DELETE FROM category WHERE id=${id}`;
   console.log("DATA", data);
   res.status(200).json({ message: "Deleted success", user: data });
 };
