@@ -1,3 +1,4 @@
+const sql = require("../config/db");
 const getAllCategory = (req, res) => {
   // postgre select
   res.status(200).json({});
@@ -27,7 +28,7 @@ const updateCategory = async (req, res) => {
 };
 const deleteCategory = async (req, res) => {
   const { id } = req.params;
-  const data = await sql`DELETE FROM category WHERE id=${id}`;
+  const data = await sql`DELETE FROM categories WHERE id=${id}`;
   console.log("DATA", data);
   res.status(200).json({ message: "Deleted success", user: data });
 };

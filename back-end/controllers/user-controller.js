@@ -6,14 +6,14 @@ const getAllUser = async (req, res) => {
   res.status(200).json({ message: "success", user: data });
 };
 const createUser = async (req, res) => {
-  const { email, name, password, profile_img } = req.body;
+  const { email, name, password, profile_Img } = req.body;
   console.log("Body", req.body);
-  const data = await sql`INSERT INTO users(email, name, password)
+  const data = await sql`INSERT INTO users(email, name, password, profile_Img)
 VALUES (
 ${email},
 ${name},
-${password}
-${profile_img}
+${password},
+${profile_Img}
 );`;
   console.log("DATA", data);
   res.status(200).json({ message: "Create user success", user: data });
