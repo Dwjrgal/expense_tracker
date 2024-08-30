@@ -7,6 +7,7 @@ const getAllUser = async (req, res) => {
 };
 const createUser = async (req, res) => {
   const { email, name, password, profile_img } = req.body;
+  console.log("Body", req.body);
   const data = await sql`INSERT INTO users(email, name, password)
 VALUES (
 ${email},
