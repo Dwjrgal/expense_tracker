@@ -1,3 +1,12 @@
+// {
+//   "uid":"40cc8213-eae4-4edd-a2af-786296162da9",
+//   "cid":"bb5ad933-ff87-43cc-8834-e120cfa557a0",
+//   "name":"Naraa",
+//   "amount":"233",
+//   "transaction_type":"INC",
+//   "description":"passs203"
+// }
+
 const sql = require("../config/db");
 
 const getAllRecords = (req, res) => {
