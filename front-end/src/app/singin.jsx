@@ -28,6 +28,15 @@ const Signin = () => {
               <input type="text" className="grow" placeholder="Re-password" />
             </label>
           </div>
+          <button className="bg-blue-600 rounded-sm text-white h-6">
+            Log in
+          </button>
+          <div className="flex gap-2 justify-center mt-2">
+            <span className="text-center text-[10px]">Don't have account?</span>
+            <a href="Sign up" className="text-[10px] text-blue-500">
+              Sign up
+            </a>
+          </div>
         </div>
       </section>
     </>
