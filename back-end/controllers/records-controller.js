@@ -17,15 +17,15 @@ const createRecords = async (req, res) => {
   const { uid, cid, name, amount, transaction_type, description } = req.body;
   console.log(req.body);
   const data =
-    await sql`INSERT INTO records (uid, cid, name, description, category_image )
+    await sql`INSERT INTO records (uid, cid, name, amount, transaction_type, description)
     VALUES (
     ${uid},
     ${cid},
     ${name},
     ${amount},
-    ${transaction_type}
-    ${description},
-    );`;
+    ${transaction_type},
+    ${description}
+    )`;
   console.log("DATA", data);
   res.status(200).json({ message: "Create records  success", user: data });
 };

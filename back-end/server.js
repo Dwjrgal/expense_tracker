@@ -4,7 +4,7 @@ const cors = require("cors");
 const { logger } = require("./middlewares/logger");
 dotenv.config();
 
-const userRoutes = require("./routes/user-route");
+const authRoutes = require("./routes/auth-route");
 const categoryRoutes = require("./routes/category-route");
 const recordRoutes = require("./routes/record-route");
 
@@ -16,6 +16,7 @@ app.use(cors());
 app.use(express.json());
 app.use(logger());
 
+app.user("/auth",authRoutes)
 app.use("/users", userRoutes);
 app.use("/categories", categoryRoutes);
 app.use("/records", recordRoutes);

@@ -1,9 +1,9 @@
 import React from "react";
 
-const Login = () => {
+const LogIn = () => {
   return (
     <section className="flex justify-between">
-      <section className="flex justify-center my-44 px-32">
+      <section className="my-44 mx-auto">
         <div className="flex flex-col gap-4 text-xs">
           <div className="mb-3 flex flex-col items-center gap-1">
             <img src="./img/GELD.png" alt="" className="h-5 mb-3" />
@@ -40,4 +40,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LogIn;
