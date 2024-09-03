@@ -1,9 +1,10 @@
 import Link from "next/link";
+import Image from "next/image";
 import React, {useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { apiUrl } from "@/utils/util";
+import { apiUrl } from "../utils/util";
 
 const LogIn = () => {
   const router = useRouter();
@@ -50,11 +51,15 @@ const LogIn = () => {
               type="text"
               placeholder="Email"
               className="border rounded h-7 text-[10px] pl-2 bg-slate-100"
-            />
+              onChange={(e) => setUserData({ ...userData, email: e.target.value })}
+              />
             <input
               type="text"
               placeholder="Password"
               className="border rounded h-7 text-[10px] pl-2 bg-slate-100"
+              onChange={(e) =>
+                setUserData({ ...userData, password: e.target.value })
+              }
             />
           </div>
           <button

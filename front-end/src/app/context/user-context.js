@@ -2,7 +2,7 @@
 
 import { createContext, useState } from "react";
 import axios from "axios";
-import { apiUrl } from "@/utils/util";
+import { apiUrl } from "../utils/util";
 
 export const UserContext = createContext();
 

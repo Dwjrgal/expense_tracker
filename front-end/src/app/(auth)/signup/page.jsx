@@ -1,10 +1,8 @@
-import React from "react";
-import Link from "next/link";
 import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
-import { apiUrl } from "@/utils/util";
+import { apiUrl } from "../utils/util";
 
 const SignUp = () => {
   const router = useRouter();
@@ -84,21 +82,33 @@ const SignUp = () => {
                 type="text"
                 className="border rounded h-7  w-52 text-[10px] pl-2 bg-slate-100"
                 placeholder="Name"
+                value={userData.name}
+                onChange={(e) => setUserData({ ...userData, name: e.target.value })}
               />
               <input
                 type="text"
                 className="border rounded h-7 text-[10px] pl-2  bg-slate-100"
                 placeholder=" Email"
+                value={userData.email}
+                onChange={(e) => setUserData({ ...userData, email: e.target.value })}
               />
               <input
                 type="text"
                 className="border rounded h-7 text-[10px] pl-2  bg-slate-100"
                 placeholder="Password"
+                value={userData.password}
+                onChange={(e) =>
+                  setUserData({ ...userData, password: e.target.value })
+                }
               />
               <input
                 type="text"
                 className="border rounded h-7 text-[10px] pl-2 bg-slate-100"
                 placeholder="Re-password"
+                value={userData.repassword}
+                onChange={(e) =>
+                  setUserData({ ...userData, repassword: e.target.value })
+                }
               />
             </div>
             <button
