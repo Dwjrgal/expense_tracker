@@ -1,19 +1,19 @@
-import React from 'react'
+import React from "react";
 
 const dashBoard = () => {
   return (
-    <section>
-    <div>
-        <img src="./img/Header_logo.png" alt="" />
+    <section className="bg-white">
+      <div>
+        <img src="./img/Header_logo.png" alt="" className="w-10" />
         <h4>Dashboard</h4>
         <p>Records</p>
-    </div>
-    <div>
+      </div>
+      <div>
         <button>+ Record</button>
         <img src="./img/Profile_img.png" alt="" />
-    </div>
+      </div>
     </section>
-  )
-}
+  );
+};
 
-export default dashBoard
+export default dashBoard;
