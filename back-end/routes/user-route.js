@@ -6,7 +6,7 @@ const {
   deleteUser,
   updateUser,
 } = require("../controllers/user-controller");
-const auth = require("../middlewares/auth");
+const { auth } = require("../middlewares/auth");
 
 const router = Router();
 
