@@ -6,9 +6,11 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Link from "next/link";
+import Loader from "@/app/loader/page";
 
 const LogIn = () => {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false)
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -18,6 +20,7 @@ const LogIn = () => {
     const { email, password } = userData;
 
     try {
+      setIsLoading( true )
       const response = await axios.post("http://localhost:8008/auth/signin", {
         email,
         password,
@@ -27,14 +30,17 @@ const LogIn = () => {
         toast.success("User successfully signed in", { autoClose: 1000 });
         const { token } = response.data;
         localStorage.setItem("token", token);
+        setIsLoading( false )
 
         router.push("/dashboard");
       }
     } catch (error) {
       console.error("There was an error signing in:", error);
+      setIsLoading( false )
       toast.error("Failed to sign in. Please try again.");
     }
   };
+   if ( isLoading ) return <Loader/>
 
   return (
     <section className="flex justify-between bg-white">
