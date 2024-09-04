@@ -3,7 +3,7 @@
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/user-context";
 import axios from "axios";
-import { apiUrl } from "../../utils/util";
+// import { apiUrl } from "../../utils/util";
 import { toast } from "react-toastify";
 
 const Dashboard = () => {
@@ -12,7 +12,7 @@ const Dashboard = () => {
 
   const fetchTransactions = async () => {
     try {
-      const res = await axios.get(`${apiUrl}/records/${user.id}`);
+      const res = await axios.get(`http://localhost:8008/records/${user.id}`);
       setTransactionData(res.data);
     } catch (error) {
       console.error(error);
@@ -27,9 +27,9 @@ const Dashboard = () => {
   }, [user.id]);
 
   return (
-    <div>
-      <div>
-        <h2>Records</h2>
+    <section>
+      <div className="bg-slate-50">
+        <img src="./img/Card.png" alt="" className="w-60 h-32" />
         {transactionData?.transactions?.map((transaction, index) => {
           return (
             <div key={index} className="flex">
@@ -42,7 +42,7 @@ const Dashboard = () => {
           );
         })}
       </div>
-    </div>
+    </section>
   );
 };
 

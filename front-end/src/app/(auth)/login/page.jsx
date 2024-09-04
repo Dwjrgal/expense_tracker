@@ -1,10 +1,11 @@
-import Link from "next/link";
+"use client";
+
 import Image from "next/image";
-import React, {useState } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { apiUrl } from "../utils/util";
+import Link from "next/link";
 
 const LogIn = () => {
   const router = useRouter();
@@ -17,7 +18,7 @@ const LogIn = () => {
     const { email, password } = userData;
 
     try {
-      const response = await axios.post(`${apiUrl}/auth/signin`, {
+      const response = await axios.post("http://localhost:8008/auth/signin", {
         email,
         password,
       });
@@ -51,10 +52,12 @@ const LogIn = () => {
               type="text"
               placeholder="Email"
               className="border rounded h-7 text-[10px] pl-2 bg-slate-100"
-              onChange={(e) => setUserData({ ...userData, email: e.target.value })}
-              />
+              onChange={(e) =>
+                setUserData({ ...userData, email: e.target.value })
+              }
+            />
             <input
-              type="text"
+              type="password"
               placeholder="Password"
               className="border rounded h-7 text-[10px] pl-2 bg-slate-100"
               onChange={(e) =>
