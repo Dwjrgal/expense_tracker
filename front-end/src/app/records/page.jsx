@@ -1,7 +1,7 @@
 "use client"
 
 import React from "react";
-import { Header } from "../components";
+import { Header, LastRecords, Select } from "../components";
 import { PiPlusThin } from "react-icons/pi";
 import { FaRegCircleDot } from "react-icons/fa6";
 import { SlArrowLeft } from "react-icons/sl";
@@ -31,11 +31,14 @@ const Records = () => {
       </div>
     </section>
     <section className="pt-5">
+      <div className="flex justify-between gap-28">
       <h5 className="flex items-center gap-2 font-normal mb-5"> <button className="w-6 h-5 bg-white text-xs pl-1 rounded-md"><SlArrowLeft className="font-bold"/></button>
         Last 30 Days <button className="w-6 h-5 bg-white text-xs pl-1 rounded-md"><SlArrowRight/></button> </h5>
+        <Select/>
+        </div>
       <p className="font-semibold">Today</p>
       <div>
-
+        {/* <LastRecords/> */}
       </div>
     </section>
     </section>
