@@ -1,10 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { PiPlusThin } from "react-icons/pi";
+import { RiLogoutCircleRLine } from "react-icons/ri";
 
 export const Header = ({ user, logOut }) => {
   return (
-    <header className="flex items-center max-w-[1200px] px-10 justify-between py-4 border-b-[1px]">
+    <header className="flex items-center max-w-[1200px] mx-12 justify-between py-4 border-b-[1px]">
       <div className="flex gap-6 items-center">
         <img src="./img/Header_logo.png" width={28} height={28} alt="logo" />
         <Link href="/dashboard">
@@ -14,19 +15,19 @@ export const Header = ({ user, logOut }) => {
           <p className="text-xs font-normal">Records</p>
         </Link>
       </div>
-      <div className="flex gap-6 items-center">
-        <button className="btn bg-blue-600 text-white btn-sm text-xs font-extralight rounded-full">
-          <PiPlusThin className=" text-lg font-extralight" />
+      <div className="flex gap-5 items-center">
+        <button className="btn bg-blue-600 text-white  btn-xs text-[10px] font-light rounded-xl flex justify-center gap-1">
+          <PiPlusThin className=" text-sm font-bold" />
           Records
         </button>
-        <div className="avatar w-10 h-10">
+        <div className="avatar w-8 h-8">
           <div className="w-24 rounded-full">
             {/* <img src={user?.avatarImg} /> */}
             <img src="./img/Profile_img.png" alt="" />
           </div>
         </div>
-        <button className="btn btn-xs text-xs bg-inherit" onClick={logOut}>
-          Log out
+        <button onClick={logOut}>
+          <RiLogoutCircleRLine className="text-xs hover:text-red-500" />
         </button>
       </div>
     </header>
