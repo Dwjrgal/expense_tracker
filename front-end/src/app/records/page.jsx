@@ -36,9 +36,9 @@ const Records = () => {
         Last 30 Days <button className="w-6 h-5 bg-white text-xs pl-1 rounded-md"><SlArrowRight/></button> </h5>
         <Select/>
         </div>
-      <p className="font-semibold">Today</p>
+      <p className="font-semibold pb-3">Today</p>
       <div>
-        {/* <LastRecords/> */}
+        <LastRecords/>
       </div>
     </section>
     </section>
