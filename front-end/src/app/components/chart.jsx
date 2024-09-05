@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-const ChartDesign = () => {
+export const ChartDesign = () => {
   const chart = () => {
     return Highcharts.chart("container", {
       data: {
@@ -27,5 +27,3 @@ const ChartDesign = () => {
     });
   };
 };
-
-export default ChartDesign;

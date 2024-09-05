@@ -5,7 +5,7 @@ import { UserContext } from "../context/user-context";
 import axios from "axios";
 // import { apiUrl } from "../../utils/util";
 import { toast } from "react-toastify";
-import { ExpenseFrame, IncomeFrame } from "../components";
+import { ExpenseFrame, IncomeFrame, LastRecords } from "../components";
 import ChartDesign from "../components/chart";
 
 const Dashboard = () => {
@@ -29,12 +29,17 @@ const Dashboard = () => {
   }, [user.id]);
 
   return (
-    <section className="mx-12">
-      <div className="bg-slate-200 flex  gap-5 pt-5">
-        <img src="./img/Card.png" alt="" className="w-72 h-36" />
-        <IncomeFrame />
-        <ExpenseFrame />
-        {/* <ChartDesign /> */}
+    <section className="bg-slate-200 w-full h-full px-12">
+      <div className=" flex  gap-5 pt-5 flex-col">
+        <div className="flex gap-5">
+          <img src="./img/Card.png" alt="" className="w-72 h-36" />
+          <IncomeFrame />
+          <ExpenseFrame />
+          {/* <ChartDesign /> */}
+        </div>
+        <div>
+          <LastRecords />
+        </div>
         {transactionData?.transactions?.map((transaction, index) => {
           return (
             <div key={index} className="flex">
