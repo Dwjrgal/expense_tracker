@@ -22,10 +22,11 @@ const getValue = async ( req, res ) => {
 }
 
 const createRecords = async (req, res) => {
-  const { uid, cid, name, amount, transaction_type, description } = req.body;
+  const { uid, cid, name, amount, transaction_type, description, created_at } =
+    req.body;
   console.log(req.body);
   const data =
-    await sql`INSERT INTO records (uid, cid, name, amount, transaction_type, description)
+    await sql`INSERT INTO records (uid, cid, name, amount, transaction_type, description, created_at)
     VALUES (
     ${uid},
     ${cid},
@@ -33,6 +34,7 @@ const createRecords = async (req, res) => {
     ${amount},
     ${transaction_type},
     ${description}
+    ${created_at}
     )`;
   console.log("DATA", data);
   res.status(200).json({ message: "Create records  success", user: data });
