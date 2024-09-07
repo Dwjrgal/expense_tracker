@@ -1,7 +1,7 @@
 "use client"
 
 import React from "react";
-import { Header, LastRecords, Select } from "../components";
+import { Header, LastRecords, Select } from "../../components";
 import { PiPlusThin } from "react-icons/pi";
 import { FaRegCircleDot } from "react-icons/fa6";
 import { SlArrowLeft } from "react-icons/sl";
