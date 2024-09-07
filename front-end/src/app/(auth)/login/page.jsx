@@ -31,7 +31,6 @@ const LogIn = () => {
         const { token } = response.data;
         localStorage.setItem("token", token);
         setIsLoading( false )
-
         router.push("/dashboard");
       }
     } catch (error) {

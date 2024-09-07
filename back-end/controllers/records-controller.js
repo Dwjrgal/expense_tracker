@@ -1,17 +1,26 @@
-// {
-//   "uid":"40cc8213-eae4-4edd-a2af-786296162da9",
-//   "cid":"bb5ad933-ff87-43cc-8834-e120cfa557a0",
-//   "name":"Naraa",
-//   "amount":"233",
-//   "transaction_type":"INC",
-//   "description":"passs203"
-// }
+
 
 const sql = require("../config/db");
 
-const getAllRecords = (req, res) => {
-  res.status(200).json({});
+const getAllRecords = async (req, res) => {
+  try {
+    const records = await sql`SELECT * FROM records`;
+    res.status(200).json({ records });
+  } catch (error) {
+    res.status(400).json({ message: "failed", error });
+  }
 };
+
+const getValue = async ( req, res ) => {
+  try {
+
+    const [income, expense] = await sql `SELECT  transaction_type, SUM(amount) FROM records GROUP BY transaction_type`
+    res.status(200).json({ income, expense });   
+  } catch (error) {
+    res.status(400).json({ message: "failed", error })
+    
+  }
+}
 
 const createRecords = async (req, res) => {
   const { uid, cid, name, amount, transaction_type, description } = req.body;
@@ -53,6 +62,7 @@ const deleteRecords = async (req, res) => {
 
 module.exports = {
   getAllRecords,
+  getValue,
   createRecords,
   updateRecords,
   deleteRecords,
