@@ -7,7 +7,6 @@ import { FaRegCircleDot } from "react-icons/fa6";
 import { SlArrowLeft } from "react-icons/sl";
 import { SlArrowRight } from "react-icons/sl";
 
-
 const Records = () => {
   return(
      <>

@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { PiPlusThin } from "react-icons/pi";
 import { RiLogoutCircleRLine } from "react-icons/ri";
+import AddRecords from "./add-records";
 
 export const Header = () => {
   const {user, logOut} = {}
@@ -18,7 +19,7 @@ export const Header = () => {
       </div>
       <div className="flex gap-5 items-center">
         <button className="btn bg-blue-600 text-white  btn-xs text-[10px] font-light rounded-xl flex justify-center gap-1">
-          <PiPlusThin className=" text-sm font-bold" />
+          <PiPlusThin className=" text-sm font-bold" onClick={AddRecords} />
           Records
         </button>
         <div className="avatar w-8 h-8">

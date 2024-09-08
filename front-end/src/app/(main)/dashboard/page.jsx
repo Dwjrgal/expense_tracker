@@ -109,6 +109,32 @@ const Dashboard = () => {
             ))}
           </section>
         </div>
+        <div>
+        {/* You can open the modal using document.getElementById('ID').showModal() method */}
+<button className="btn" onClick={()=>document.getElementById('my_modal_3').showModal()}>open modal</button>
+<dialog id="my_modal_3" className="modal">
+  <div className="modal-box">
+    <form method="dialog">
+      {/* if there is a button in form, it will close the modal */}
+      <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+    </form>
+    <h3 className="font-bold text-lg">Add Records</h3>
+    <div className="join grid grid-cols-2">
+  <button className="join-item btn border rounded-full bg-blue-700 text-white">Expense</button>
+  <button className="join-item btn border rounded-full">Income</button>
+  <div className="flex flex-col gap-4 mt-5 w-80">
+  <input type="text" placeholder="$ 000" className="input input-bordered w-full h-20" />
+  <h4>Category</h4>
+  <select className="select select-bordered w-full max-w-xs">
+  <option disabled selected>Choose</option>
+  <option>Han Solo</option>
+  <option>Greedo</option>
+</select>
+</div>
+</div>
+  </div>
+</dialog>
+    </div>
       </div>
     </section>
   );
