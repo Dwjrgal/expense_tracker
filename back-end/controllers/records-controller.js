@@ -13,7 +13,6 @@ const getAllRecords = async (req, res) => {
 
 const getValue = async ( req, res ) => {
   try {
-
     const [income, expense] = await sql `SELECT  transaction_type, SUM(amount) FROM records GROUP BY transaction_type`
     res.status(200).json({ income, expense });   
   } catch (error) {

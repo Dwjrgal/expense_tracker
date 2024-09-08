@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useState } from "react";
+import { createContext,useEffect, useState } from "react";
 import axios from "axios";
 import { apiUrl } from "@/utils/util";
 
@@ -17,20 +17,25 @@ export const UserProvider = ({ children }) => {
   const fetchUserData = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.get(`${apiUrl}/users/profile`, {
+      const response = await axios.get(`http://localhost:8008/users/profile`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
 
       if (response.status === 200) {
-        setUser(response.data);
+        setUser(response.data.user);
         console.log("USER", response.data);
       }
     } catch (error) {
       console.error("Error fetching user data:", error);
     }
   };
+  useEffect(() => {
+    if(!user) {
+    }
+    fetchUserData();
+  }, [ user ]);
 
   return (
     <UserContext.Provider value={{ user, fetchUserData }}>

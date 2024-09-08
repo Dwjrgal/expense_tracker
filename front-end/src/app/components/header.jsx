@@ -3,7 +3,8 @@ import Link from "next/link";
 import { PiPlusThin } from "react-icons/pi";
 import { RiLogoutCircleRLine } from "react-icons/ri";
 
-export const Header = ({ user, logOut }) => {
+export const Header = () => {
+  const {user, logOut} = {}
   return (
     <header className="flex items-center max-w-[1200px] mx-12 justify-between py-4 border-b-[1px]">
       <div className="flex gap-6 items-center">

@@ -30,8 +30,9 @@ const LogIn = () => {
         toast.success("User successfully signed in", { autoClose: 1000 });
         const { token } = response.data;
         localStorage.setItem("token", token);
-        setIsLoading( false )
         router.push("/dashboard");
+        setIsLoading( false )
+        
       }
     } catch (error) {
       console.error("There was an error signing in:", error);

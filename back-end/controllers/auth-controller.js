@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const signUp = async (req, res) => {
+  try{
   const { email, name, password } = req.body;
   const hashedPassword = bcrypt.hashSync(password, 10);
   const data = await sql`
@@ -11,9 +12,13 @@ const signUp = async (req, res) => {
   `;
   console.log("DATA", data);
   res.status(201).json({ message: "New user registered successfully" });
+  } catch ( error) {
+    res.status(400).json({ message: " Client error"})
+  }
 };
 
 const signIn = async (req, res) => {
+  try{
   const { email, password } = req.body;
   const [user] = await sql`
     SELECT * FROM users WHERE email=${email}
@@ -37,6 +42,9 @@ const signIn = async (req, res) => {
       });
     }
   }
+} catch( error ) {
+  res.status( 400).json({message: "Client error"})
+}
 };
 
 module.exports = { signUp, signIn };

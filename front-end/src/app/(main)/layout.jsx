@@ -7,24 +7,24 @@ import { Header } from "../components";
 
 const Layout = ({ children }) => {
   const { user, fetchUserData } = useContext(UserContext);
-  const router = useRouter();
+  // const router = useRouter();
 
   useEffect(() => {
     fetchUserData();
   }, []);
 
-  const logOut = () => {
-    localStorage.removeItem("token");
-    router.push("/login");
-  };
+  // const logOut = () => {
+  //   localStorage.removeItem("token");
+  //   router.push("/login");
+  // };
 
-  if (!user ) {
-    redirect("/login")
-  }
+  // if (!user ) {
+  //   redirect("/login")
+  // }
 
   return (
     <div>
-      <Header user={user} logOut={logOut} />
+      <Header/>
       {children}
     </div>
   );
