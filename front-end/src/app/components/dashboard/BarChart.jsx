@@ -1,18 +1,22 @@
+import { useState } from "react";
 import { Bar } from "react-chartjs-2";
+import { RxBorderWidth } from "react-icons/rx";
 
-const BarChart = ({ barChartData }) => {
+const BarChart = ({ cardValue, recDate }) => {
   const data1 = {
-    labels: ["Jan, Feb, March "],
+    labels: [
+      "   Jan         Feb         March         April      May        June       ",
+    ],
     datasets: [
       {
         label: "Income",
         backgroundColor: "#22C55E",
-        data: [20_000],
+        data: [cardValue?.income?.sum],
       },
       {
         label: "Expense",
         backgroundColor: "#F87171",
-        data: [15_000],
+        data: [cardValue?.expense?.sum],
       },
     ],
   };
@@ -28,7 +32,7 @@ const BarChart = ({ barChartData }) => {
   };
 
   return (
-    <div className="flex items-center justify-center p-4 bg-white card w-[460px]">
+    <div className="flex items-center justify-center p-4 bg-white card  h-60 w-[460px]">
       {/* {barChartData && <Bar data={data1} options={options1} />} */}
       <Bar data={data1} options={options1} />
       {/* {!barChartData && (

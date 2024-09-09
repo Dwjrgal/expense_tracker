@@ -1,5 +1,3 @@
-
-
 const sql = require("../config/db");
 
 const getAllRecords = async (req, res) => {
@@ -11,15 +9,24 @@ const getAllRecords = async (req, res) => {
   }
 };
 
-const getValue = async ( req, res ) => {
+const getValue = async (req, res) => {
   try {
-    const [income, expense] = await sql `SELECT  transaction_type, SUM(amount) FROM records GROUP BY transaction_type`
-    res.status(200).json({ income, expense });   
+    const [expense, income] =
+      await sql`SELECT  transaction_type, SUM(amount) FROM records GROUP BY transaction_type`;
+    res.status(200).json({ expense, income });
   } catch (error) {
-    res.status(400).json({ message: "failed", error })
-    
+    res.status(400).json({ message: "failed", error });
   }
-}
+};
+const chartRec = async (req, res) => {
+  try {
+    const [recDate] =
+      await sql`SELECT  created_at transaction_type, SUM(amount) FROM records GROUP BY created_at`;
+    res.status(200).json({ recDate });
+  } catch (error) {
+    res.status(400).json({ message: "failed", error });
+  }
+};
 
 const createRecords = async (req, res) => {
   const { uid, cid, name, amount, transaction_type, description, created_at } =
@@ -64,6 +71,7 @@ const deleteRecords = async (req, res) => {
 module.exports = {
   getAllRecords,
   getValue,
+  chartRec,
   createRecords,
   updateRecords,
   deleteRecords,

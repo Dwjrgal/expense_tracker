@@ -38,7 +38,7 @@ const DoughnurChart = ({ categoryData }) => {
   };
 
   return (
-    <div className="flex items-center justify-center p-4 bg-white card ">
+    <div className="flex items-center justify-center  h-60 p-4 bg-white card">
       <div className="h-60 w-[450px]">
         <Doughnut options={options2} data={data2} />
         {/* {categoryData && <Doughnut options={options2} data={data2} />}

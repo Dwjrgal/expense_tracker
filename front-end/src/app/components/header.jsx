@@ -5,9 +5,9 @@ import { RiLogoutCircleRLine } from "react-icons/ri";
 import AddRecords from "./add-records";
 
 export const Header = () => {
-  const {user, logOut} = {}
+  const { user, logOut } = {};
   return (
-    <header className="flex items-center max-w-[1200px] mx-12 justify-between py-4 border-b-[1px]">
+    <header className="flex items-center max-w-5xl mx-12 justify-between py-4 border-b-[1px] pl-[60px]">
       <div className="flex gap-6 items-center">
         <img src="./img/Header_logo.png" width={28} height={28} alt="logo" />
         <Link href="/dashboard">

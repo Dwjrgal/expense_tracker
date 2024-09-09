@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Header, LastRecords, Select } from "../../components";
+import { Select } from "../../components";
 import { PiPlusThin } from "react-icons/pi";
 import { FaRegCircleDot } from "react-icons/fa6";
 import { SlArrowLeft } from "react-icons/sl";
@@ -10,7 +10,6 @@ import { SlArrowRight } from "react-icons/sl";
 const Records = () => {
   return (
     <>
-      <Header />
       <section className="flex gap-10 bg-slate-100">
         <section className="bg-white rounded flex flex-col gap-4 pt-4 px-4 mt-5 ml-12 w-90">
           <h3 className="text-2xl font-bold">Records</h3>
@@ -63,9 +62,6 @@ const Records = () => {
             <Select />
           </div>
           <p className="font-semibold pb-3">Today</p>
-          <div>
-            <LastRecords />
-          </div>
         </section>
       </section>
     </>
