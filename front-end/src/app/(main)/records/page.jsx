@@ -64,7 +64,7 @@ const Records = () => {
           <div className="flex gap-3 items-center font-normal text-gray-700 ml-5">
           <IoEye /> <h4>Food & Drink</h4>
           </div>
-          <button className="flex gap-3 items-center ml-5 text-semibold text-gray-700"><FaPlus className="text-blue-600 text-lg"/>Add Category</button>
+          <button className="flex gap-3 items-center ml-5 text-semibold text-gray-700" id="11"><FaPlus className="text-blue-600 text-lg"/>Add Category</button>
         </section>
         <section className="pt-5 w-[600px]">
           <div className="flex justify-between gap-28">
