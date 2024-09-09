@@ -95,13 +95,13 @@ const Dashboard = () => {
         </div>
         <div>
           <section className="bg-white rounded  pt-3">
-            <h3 className="font-semibold pb-3 pl-4">Last Records</h3>
+            <h3 className="font-semibold pb-4 pl-4 text-sm">Last Records</h3>
             {transactions.map((tr) => (
               <div className="flex items-center justify-between border-solid border-t-2 border-gray gap-2 pt-4 pb-4 ml-4">
                 <div className="flex gap-3">
-                  <img className="h-8" src={tr.category_image}></img>
+                  <img className="h-6" src="./img/Home.png"></img>
                   <div className="flex flex-col text-xs">
-                    <h4 className="font-semibold">{tr.name}</h4>
+                    <h4 className="font-normal">{tr.name}</h4>
                     <p className="text-xs text-gray-500">{tr.created_at}</p>
                   </div>
                 </div>
