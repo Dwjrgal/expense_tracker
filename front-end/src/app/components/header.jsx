@@ -14,7 +14,7 @@ export const Header = () => {
           <p className="font-semibold text-sm">Dashboard</p>
         </Link>
         <Link href="/records">
-          <p className="text-xs font-normal">Records</p>
+          <p className="text-xs font-normal hover:font-semibold">Records</p>
         </Link>
       </div>
       <div className="flex gap-5 items-center">
