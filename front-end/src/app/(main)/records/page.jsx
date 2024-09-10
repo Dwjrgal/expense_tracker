@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { Select } from "../../components";
 import { FaRegCircleDot } from "react-icons/fa6";
 import { SlArrowLeft } from "react-icons/sl";
 import { SlArrowRight } from "react-icons/sl";
@@ -82,7 +81,6 @@ const Records = () => {
                 <SlArrowRight />
               </button>{" "}
             </h5>
-            {/* <Select className="h-3" /> */}
           </div>
           <p className="font-semibold pb-3 text-sm">Today</p>
           <section className="bg-white rounded  pt-3">

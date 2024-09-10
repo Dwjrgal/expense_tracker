@@ -1,7 +1,10 @@
-import React from "react";
+
+import React, { useState } from "react";
 import { PiPlusThin } from "react-icons/pi";
+import { IncomeModal } from "./inc-modal";
 
 const RecordModal = () => {
+  const [activeTab, setActiveTab] = useState("INC");
   return (
     <div>
       <button
@@ -14,21 +17,33 @@ const RecordModal = () => {
       <dialog id="my_modal_3" className="modal w-[400px]">
         <div className="modal-box pr-7">
           <form method="dialog">
-            {/* if there is a button in form, it will close the modal */}
-            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 py-4">
+            <button className="btn btn-sm btn-circle absolute right-2 top-2 py-4">
               ✕
             </button>
           </form>
           <h3 className="font-bold text-sm pb-5">Add Records</h3>
           <div className="w-60 h-60 flex flex-col px-5">
-            {/* <div className="flex">
-              <button className="join-item btn border rounded-full bg-blue-700 text-white">
+            <div className="flex join">
+              <button className={`join-item btn border rounded-full  w-36 ${
+						activeTab === "EXP"
+							? "bg-blue-700 text-white"
+							: "bg-slate-200 text-black"
+					}`}
+					onClick={() => setActiveTab("EXP")}>
                 Expense
               </button>
-              <button className="join-item btn border rounded-full">
+
+
+              <button className={`join-item btn border rounded-full w-36 ${
+						activeTab === "INC"
+							? "bg-lime-600 text-white"
+							: "bg-slate-200 text-black"
+					}`}
+					onClick={() => setActiveTab("INC")}
+				>
                 Income
               </button>
-            </div> */}
+            </div>
 
             <div className="flex flex-col mt-5 w-72">
               <p className="font-semibold text-xs mb-1">Amount</p>
@@ -57,7 +72,9 @@ const RecordModal = () => {
                   className="w-[135px] max-w-xs input input-bordered bg-slate-100 text-xs"
                 />
               </div>
-              <button className="bg-blue-600 text-white h-8  w-72 border rounded-full mt-4 mb-5 text-sm">
+              <button className={` h-8  w-72 border rounded-full mt-4 mb-5 text-sm  ${
+						activeTab === "EXP" ? "bg-blue-700" : "bg-lime-600"
+					} text-white w-full`}>
                 Add Record{" "}
               </button>
             </div>

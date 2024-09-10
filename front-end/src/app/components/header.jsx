@@ -2,8 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { PiPlusThin } from "react-icons/pi";
 import { RiLogoutCircleRLine } from "react-icons/ri";
-import AddRecords from "./add-records";
-import AddCategory from "./record-modal";
 
 export const Header = () => {
   const { user, logOut } = {};
