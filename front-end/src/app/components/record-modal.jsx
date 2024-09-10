@@ -5,7 +5,7 @@ const RecordModal = () => {
   return (
     <div>
       <button
-        className=" w-[150px] h-5 bg-blue-600 rounded-xl text-white  flex justify-center items-center gap-2 text-xs"
+        className=" w-[150px] h-5 bg-blue-600 rounded-xl text-white  flex justify-center items-center gap-1 text-xs"
         onClick={() => document.getElementById("my_modal_3").showModal()}
       >
         <PiPlusThin className="text-white text-lg" />

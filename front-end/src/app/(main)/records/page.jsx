@@ -77,7 +77,7 @@ const Records = () => {
               <button className="w-4 h-4 bg-slate-200 text-[8px] pl-1 rounded-md">
                 <SlArrowLeft className="font-bold" />
               </button>
-              <p className="text-xs">Last 30 Days</p>
+              <p className="text-xs font-normal">Last 30 Days</p>
               <button className="w-4 h-4 bg-slate-200 text-[8px] pl-1 rounded-md">
                 <SlArrowRight />
               </button>{" "}
