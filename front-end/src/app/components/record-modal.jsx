@@ -1,7 +1,6 @@
 
 import React, { useState } from "react";
 import { PiPlusThin } from "react-icons/pi";
-import { IncomeModal } from "./inc-modal";
 
 const RecordModal = () => {
   const [activeTab, setActiveTab] = useState("INC");
