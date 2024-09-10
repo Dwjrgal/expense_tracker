@@ -1,8 +1,27 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
 import { RxBorderWidth } from "react-icons/rx";
 
-const BarChart = ({ cardValue, recDate }) => {
+const BarChart = ({}) => {
+  const [chartValue, setChartValue] = useState([])
+
+  const getChartInf = async () => {
+    try {
+      const res = await axios.get(`http://localhost:8008/records/chart`);
+      setChartValue(res.data);
+      console.log ("chart data",setChartValue)
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to fetch chartvalue")
+    }
+  };
+
+  useEffect(()=>{
+    getChartInf();
+  }, [])
+
+
+
   const data1 = {
     labels: [
       "   Jan         Feb         March         April      May        June       ",
@@ -11,12 +30,12 @@ const BarChart = ({ cardValue, recDate }) => {
       {
         label: "Income",
         backgroundColor: "#22C55E",
-        data: [cardValue?.income?.sum],
+        data: [],
       },
       {
         label: "Expense",
         backgroundColor: "#F87171",
-        data: [cardValue?.expense?.sum],
+        data: [],
       },
     ],
   };
@@ -30,25 +49,18 @@ const BarChart = ({ cardValue, recDate }) => {
       },
     },
   };
-
+  console.log ("ChartValue",chartValue)
   return (
     <div className="flex items-center justify-center p-4 bg-white card w-[360px]">
       <div className="flex justify-start w-[360px] border-b-[1px] px-4 pb-2">
         <p className="text-[10px]">Income-Expense</p>
       </div>
-      {/* {barChartData && <Bar data={data1} options={options1} />} */}
+      {chartValue.map((cValue) => {
+        data1.labels=[cValue.month]
+        datasets.data=[cValue.total_exp]
+
+      })}
       <Bar data={data1} options={options1} />
-      {/* {!barChartData && (
-        <div className="flex items-end justify-center w-full gap-4 ">
-          <div className="w-4 skeleton h-14"></div>
-          <div className="w-4 h-16 skeleton"></div>
-          <div className="w-4 h-24 skeleton"></div>
-          <div className="w-4 h-24 skeleton"></div>
-          <div className="w-4 h-24 skeleton"></div>
-          <div className="w-4 h-16 skeleton"></div>
-          <div className="w-4 skeleton h-14"></div>
-        </div>
-      )} */}
     </div>
   );
 };
