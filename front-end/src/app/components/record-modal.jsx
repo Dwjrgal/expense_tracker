@@ -47,26 +47,14 @@ const RecordModal = () => {
                 <option>Housing</option>
               </select>
               <div className="flex gap-4 mt-3">
-                <div>
-                  <h4 className="font-semibold text-xs">Date</h4>
-                  <select className="select select-bordered w-full max-w-xs bg-slate-100 mt-1">
-                    <option disabled selected>
-                      Who shot first?
-                    </option>
-                    <option>Han Solo</option>
-                    <option>Greedo</option>
-                  </select>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-xs">Time</h4>
-                  <select className="select select-bordered w-full max-w-xs bg-slate-100 mt-1">
-                    <option disabled selected>
-                      Who shot first?
-                    </option>
-                    <option>Han Solo</option>
-                    <option>Greedo</option>
-                  </select>
-                </div>
+                <input
+                  type="date"
+                  className="w-full max-w-xs input input-bordered input-primary"
+                />
+                <input
+                  type="time"
+                  className="w-full max-w-xs input input-bordered input-primary"
+                />
               </div>
               <button className="bg-blue-600 text-white h-8 border rounded-full mt-5 mb-5">
                 Add Record{" "}
