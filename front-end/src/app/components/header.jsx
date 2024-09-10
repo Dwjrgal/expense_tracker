@@ -3,11 +3,12 @@ import Link from "next/link";
 import { PiPlusThin } from "react-icons/pi";
 import { RiLogoutCircleRLine } from "react-icons/ri";
 import AddRecords from "./add-records";
+import AddCategory from "./record-modal";
 
 export const Header = () => {
   const { user, logOut } = {};
   return (
-    <header className="flex items-center max-w-5xl mx-12 justify-between py-4 border-b-[1px] pl-[60px]">
+    <header className="flex items-center max-w-5xl mx-auto justify-between py-4 border-b-[1px]  w-[820px]">
       <div className="flex gap-6 items-center">
         <img src="./img/Header_logo.png" width={28} height={28} alt="logo" />
         <Link href="/dashboard">
@@ -19,7 +20,7 @@ export const Header = () => {
       </div>
       <div className="flex gap-5 items-center">
         <button className="btn bg-blue-600 text-white  btn-xs text-[10px] font-light rounded-xl flex justify-center gap-1">
-          <PiPlusThin className=" text-sm font-bold" onClick={AddRecords} />
+          <PiPlusThin className=" text-sm font-bold" />
           Records
         </button>
         <div className="avatar w-8 h-8">

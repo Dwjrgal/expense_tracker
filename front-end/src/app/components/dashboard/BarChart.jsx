@@ -32,7 +32,10 @@ const BarChart = ({ cardValue, recDate }) => {
   };
 
   return (
-    <div className="flex items-center justify-center p-4 bg-white card  h-60 w-[460px]">
+    <div className="flex items-center justify-center p-4 bg-white card w-[360px]">
+      <div className="flex justify-start w-[360px] border-b-[1px] px-4 pb-2">
+        <p className="text-[10px]">Income-Expense</p>
+      </div>
       {/* {barChartData && <Bar data={data1} options={options1} />} */}
       <Bar data={data1} options={options1} />
       {/* {!barChartData && (
