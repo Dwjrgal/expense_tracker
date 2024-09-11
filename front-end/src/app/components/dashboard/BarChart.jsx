@@ -1,4 +1,5 @@
 import axios from "axios";
+import { plugins } from "chart.js";
 import { useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
 import { RxBorderWidth } from "react-icons/rx";
@@ -41,12 +42,8 @@ const BarChart = ({}) => {
   };
 
   const options1 = {
-    responsive: true,
-
-    scales: {
-      y: {
-        beginAtZero: true,
-      },
+    plugins: {
+      innerWidth,
     },
   };
   console.log("ChartValue", chartValue);
