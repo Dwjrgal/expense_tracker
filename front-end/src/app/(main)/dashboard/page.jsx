@@ -24,7 +24,7 @@ const Dashboard = () => {
   const { user } = useContext(UserContext);
   const [transactions, setTransactions] = useState([]);
   const [cardValue, setCardValue] = useState({});
-  const [trType, setTrType] = useState("INC");
+  const [trType, setTrType] = useState(transactions.transaction_type);
 
   const fetchTransactions = async () => {
     try {
@@ -52,6 +52,8 @@ const Dashboard = () => {
   }, [user]);
 
   console.log("Card data", cardValue);
+  console.log("transaction data:", transactions)
+  console.log("tr", trType)
   return (
     <section className="bg-slate-200 w-full h-full px-10 flex justify-center">
       <div className=" flex  gap-2 pt-5 flex-col">
@@ -106,8 +108,8 @@ const Dashboard = () => {
                   </div>
                 </div>
                 <span
-                  className={`pr-4 text-green-400 text-[11px]${
-                    tr.type === "EXP" ? "text-red-500" : "text-green-500"
+                  className={`pr-4  text-[11px]${
+                    tr.transaction_type === "EXP" ? "text-red-500" : "text-green-500"
                   }`}
                 >
                   {tr.amount}
