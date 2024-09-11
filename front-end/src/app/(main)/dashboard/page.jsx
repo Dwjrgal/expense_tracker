@@ -24,6 +24,7 @@ const Dashboard = () => {
   const { user } = useContext(UserContext);
   const [transactions, setTransactions] = useState([]);
   const [cardValue, setCardValue] = useState({});
+  const [trType, setTrType] = useState("INC");
 
   const fetchTransactions = async () => {
     try {
@@ -51,7 +52,6 @@ const Dashboard = () => {
   }, [user]);
 
   console.log("Card data", cardValue);
-  console.log(cardValue.income);
   return (
     <section className="bg-slate-200 w-full h-full px-10 flex justify-center">
       <div className=" flex  gap-2 pt-5 flex-col">
@@ -90,8 +90,8 @@ const Dashboard = () => {
           </div>
         </div>
         <div className="flex gap-3">
-          <BarChart cardValue={cardValue} />
-          <DoughnurChart fetchTransactions={fetchTransactions} />
+          <BarChart />
+          <DoughnurChart />
         </div>
         <div>
           <section className="bg-white rounded pt-3">
@@ -105,7 +105,11 @@ const Dashboard = () => {
                     <p className="text-[8px] text-gray-500">{tr.created_at}</p>
                   </div>
                 </div>
-                <span className="text-green-400 pr-4 text-[11px]">
+                <span
+                  className={`pr-4 text-green-400 text-[11px]${
+                    tr.type === "EXP" ? "text-red-500" : "text-green-500"
+                  }`}
+                >
                   {tr.amount}
                 </span>
               </div>

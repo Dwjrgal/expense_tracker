@@ -5,9 +5,9 @@ import { FaRegCircleDot } from "react-icons/fa6";
 import { SlArrowLeft } from "react-icons/sl";
 import { SlArrowRight } from "react-icons/sl";
 import { IoEye } from "react-icons/io5";
-import { FaPlus } from "react-icons/fa6";
 import { GrEmptyCircle } from "react-icons/gr";
 import RecordModal from "@/app/components/record-modal";
+import { CategoryModal } from "@/app/components";
 
 const Records = () => {
   return (
@@ -28,8 +28,8 @@ const Records = () => {
                 {" "}
                 <label className="swap">
                   <input type="checkbox" />
-                  <FaRegCircleDot className="swap-on"></FaRegCircleDot>
-                  <GrEmptyCircle className="swap-off"></GrEmptyCircle>
+                  <GrEmptyCircle className="swap-on"></GrEmptyCircle>
+                  <FaRegCircleDot className="swap-off"></FaRegCircleDot>
                 </label>
                 All
               </li>
@@ -60,13 +60,7 @@ const Records = () => {
             <div className="flex gap-3 items-center font-normal text-gray-700 ml-2 text-[11px]">
               <IoEye /> <h4>Food & Drink</h4>
             </div>
-            <button
-              className="flex gap-3 items-center ml-2  text-gray-700 text-[11px]"
-              id="11"
-            >
-              <FaPlus className="text-blue-600" />
-              Add Category
-            </button>
+            <CategoryModal />
           </div>
         </section>
         <section className="pt-5 w-[600px]">

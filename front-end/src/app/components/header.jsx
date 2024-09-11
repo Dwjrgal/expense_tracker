@@ -5,6 +5,7 @@ import { RiLogoutCircleRLine } from "react-icons/ri";
 
 export const Header = () => {
   const { user, logOut } = {};
+
   return (
     <header className="flex items-center max-w-5xl mx-auto justify-between py-4 border-b-[1px]  w-[820px]">
       <div className="flex gap-6 items-center">

@@ -1,10 +1,31 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { Doughnut } from "react-chartjs-2";
 
-const DoughnurChart = ({ categoryData }) => {
+const DoughnurChart = () => {
+  const [donutValue, setDonutValue] = useState(null);
+
+  const getChartInfo = async () => {
+    try {
+      const res = await axios.get(`http://localhost:8008/records/chart`);
+      setDonutValue({ bar: res.data.bar, donut: res.data.donut });
+    } catch (error) {
+      console.error(error);
+      // toast.error("Failed to fetch chartvalue");
+    }
+  };
+
+  useEffect(() => {
+    getChartInfo();
+  }, []);
+
+  const dnt = donutValue?.donut?.map((d) => d.sum);
+  const lbl = donutValue?.donut?.map((d) => d.cat_name);
+
   const data2 = {
     datasets: [
       {
-        data: [10, 10, 20, 40, 20],
+        data: dnt,
 
         backgroundColor: [
           "#1C64F2",
@@ -22,20 +43,20 @@ const DoughnurChart = ({ categoryData }) => {
         ],
       },
     ],
-    labels: ["Food", "Tech", "Taxi", "Health", "Car"],
+    labels: lbl,
   };
 
   const options2 = {
-    legend: {
-      align: "start",
-      position: "right",
-
-      labels: {
-        display: false,
+    plugins: {
+      legend: {
         position: "right",
+      },
+      colors: {
+        forceOverride: true,
       },
     },
   };
+  console.log("donutValue", donutValue);
 
   return (
     <div className="flex items-center justify-center p-4  bg-white card">
@@ -45,12 +66,6 @@ const DoughnurChart = ({ categoryData }) => {
           <p className="text-[10px] text-gray-600">Jun-1 Nov-30</p>
         </div>
         <Doughnut options={options2} data={data2} className="h-10" />
-        {/* {categoryData && <Doughnut options={options2} data={data2} />}
-        {!categoryData && (
-          <div className="flex items-center justify-center w-full h-full gap-4">
-            <div className="w-24 h-24 rounded-full skeleton"></div>
-          </div>
-        )} */}
       </div>
     </div>
   );
