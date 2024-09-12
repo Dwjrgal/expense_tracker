@@ -11,13 +11,12 @@ import { CategoryModal } from "@/app/components";
 import axios from "axios";
 
 const Records = () => {
-  const [categoryName, setCategoryName] = useState("");
+  const [categoryName, setCategoryName] = useState([]);
 
   const addCategory = async () => {
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.post(
-        "http://localhost:8008/categories",
+      const res = await axios.post("http://localhost:8008/categories",
         {
           name: categoryName,
         },
@@ -32,7 +31,6 @@ const Records = () => {
       console.log("error", error);
     }
   };
-
   return (
     <>
       <section className="flex justify-center gap-5 bg-slate-100  w-full">
@@ -81,7 +79,10 @@ const Records = () => {
           </div>
           <div className="flex flex-col gap-1">
             <div className="flex gap-3 items-center font-normal text-gray-700 ml-2 text-[11px]">
-              <IoEye /> <h4>Food & Drink</h4>
+              <IoEye /><h4>{categoryName}</h4>
+              {/* {categoryName.map((ct) =>(
+              <h4>{ct.name}</h4>
+              ))} */}
             </div>
             <CategoryModal
               setCategoryName={setCategoryName}

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { FaPlus } from "react-icons/fa6";
 
 export const CategoryModal = ({ setCategoryName, addCategory }) => {
-  const [addBtn, setAddBtn] = useState(false);
+  // const [addBtn, setAddBtn] = useState(false);
   return (
     <>
       <button
