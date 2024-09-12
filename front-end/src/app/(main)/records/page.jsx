@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { FaRegCircleDot } from "react-icons/fa6";
 import { SlArrowLeft } from "react-icons/sl";
 import { SlArrowRight } from "react-icons/sl";
@@ -8,8 +8,31 @@ import { IoEye } from "react-icons/io5";
 import { GrEmptyCircle } from "react-icons/gr";
 import RecordModal from "@/app/components/record-modal";
 import { CategoryModal } from "@/app/components";
+import axios from "axios";
 
 const Records = () => {
+  const [categoryName, setCategoryName] = useState("");
+
+  const addCategory = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const res = await axios.post(
+        "http://localhost:8008/categories",
+        {
+          name: categoryName,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log("success add category");
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+
   return (
     <>
       <section className="flex justify-center gap-5 bg-slate-100  w-full">
@@ -60,7 +83,10 @@ const Records = () => {
             <div className="flex gap-3 items-center font-normal text-gray-700 ml-2 text-[11px]">
               <IoEye /> <h4>Food & Drink</h4>
             </div>
-            <CategoryModal />
+            <CategoryModal
+              setCategoryName={setCategoryName}
+              addCategory={addCategory}
+            />
           </div>
         </section>
         <section className="pt-5 w-[600px]">

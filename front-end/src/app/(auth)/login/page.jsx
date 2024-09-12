@@ -10,7 +10,7 @@ import Loader from "@/app/loader/page";
 
 const LogIn = () => {
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -20,7 +20,7 @@ const LogIn = () => {
     const { email, password } = userData;
 
     try {
-      setIsLoading( true )
+      setIsLoading(true);
       const response = await axios.post("http://localhost:8008/auth/signin", {
         email,
         password,
@@ -29,18 +29,18 @@ const LogIn = () => {
       if (response.status === 200) {
         toast.success("User successfully signed in", { autoClose: 1000 });
         const { token } = response.data;
+        console.log("token", token);
         localStorage.setItem("token", token);
         router.push("/dashboard");
-        setIsLoading( false )
-        
+        setIsLoading(false);
       }
     } catch (error) {
       console.error("There was an error signing in:", error);
-      setIsLoading( false )
+      setIsLoading(false);
       toast.error("Failed to sign in. Please try again.");
     }
   };
-   if ( isLoading ) return <Loader/>
+  if (isLoading) return <Loader />;
 
   return (
     <section className="flex justify-between bg-white">

@@ -5,16 +5,19 @@ const getAllCategory = (req, res) => {
 };
 
 const createCategory = async (req, res) => {
-  const { name, description, category_image } = req.body;
-  const data =
-    await sql`INSERT INTO categories (name, description, category_image )
-  VALUES (
-  ${name},
-  ${description},
-  ${category_image}
-  );`;
-  console.log("DATA", data);
-  res.status(200).json({ message: "Create category success", user: data });
+  try {
+    console.log("first");
+    const { name } = req.body;
+    const data = await sql`INSERT INTO categories (name)
+    VALUES (
+    ${name}
+    );`;
+    console.log("DATA", data);
+    res.status(200).json({ message: "Create category success", user: data });
+  } catch (error) {
+    console.log("eeror", error);
+    res.status(500).json({ message: "create category failed" });
+  }
 };
 
 const updateCategory = async (req, res) => {
