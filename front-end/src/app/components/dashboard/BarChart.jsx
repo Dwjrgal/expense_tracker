@@ -43,7 +43,7 @@ const BarChart = ({}) => {
 
   const options1 = {
     plugins: {
-      innerWidth,
+      innerWidth: 8,
     },
   };
   console.log("ChartValue", chartValue);
