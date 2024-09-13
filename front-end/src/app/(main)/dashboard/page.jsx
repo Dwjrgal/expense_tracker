@@ -3,7 +3,7 @@
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../context/user-context";
 import axios from "axios";
-// import { apiUrl } from "../../utils/util";
+import { apiUrl } from "../../utils/util";
 import { toast } from "react-toastify";
 import { RxDotFilled } from "react-icons/rx";
 import { IoArrowUpCircleSharp, IoArrowDownCircleSharp } from "react-icons/io5";
@@ -26,7 +26,7 @@ const Dashboard = () => {
   const [cardValue, setCardValue] = useState({});
   const fetchTransactions = async () => {
     try {
-      const res = await axios.get("http://localhost:8008/records");
+      const res = await axios.get(`${apiUrl}/records`);
       setTransactions(res.data.records);
     } catch (error) {
       console.error(error);
@@ -36,7 +36,7 @@ const Dashboard = () => {
 
   const getCardData = async () => {
     try {
-      const res = await axios.get(`http://localhost:8008/records/value`);
+      const res = await axios.get(`${apiUrl}/records/value`);
       console.log("ST", res.data);
       setCardValue(res.data);
     } catch (error) {

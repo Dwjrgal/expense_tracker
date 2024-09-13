@@ -10,6 +10,7 @@ import RecordModal from "@/app/components/record-modal";
 import { CategoryModal } from "@/app/components";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { apiUrl } from "@/app/utils/util";
 
 const Records = () => {
   const [categoryName, setCategoryName] = useState([]);
@@ -18,7 +19,7 @@ const Records = () => {
   const getCategories = async (req, res) => {
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.get("http://localhost:8008/categories");
+      const res = await axios.get(`${apiUrl}/categories`);
       setCategories(res.data);
     } catch (error) {
       console.error(error);
@@ -31,7 +32,7 @@ const Records = () => {
       const token = localStorage.getItem("token");
       console.log("Token", token);
       const res = await axios.post(
-        "http://localhost:8008/categories",
+        `${apiUrl}/categories`,
         {
           name: categoryName,
         },

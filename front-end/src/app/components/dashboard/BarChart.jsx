@@ -1,3 +1,4 @@
+import { apiUrl } from "@/app/utils/util";
 import axios from "axios";
 import { plugins } from "chart.js";
 import { useEffect, useState } from "react";
@@ -10,7 +11,7 @@ const BarChart = ({}) => {
 
   const getChartInf = async () => {
     try {
-      const res = await axios.get(`http://localhost:8008/records/chart`);
+      const res = await axios.get(`${apiUrl}/records/chart`);
       setChartValue({ bar: res.data.bar, donut: res.data.donut });
     } catch (error) {
       console.error(error);

@@ -1,3 +1,4 @@
+import { apiUrl } from "@/app/utils/util";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Doughnut } from "react-chartjs-2";
@@ -7,7 +8,7 @@ const DoughnurChart = () => {
 
   const getChartInfo = async () => {
     try {
-      const res = await axios.get(`http://localhost:8008/records/chart`);
+      const res = await axios.get(`${apiUrl}/records/chart`);
       setDonutValue({ bar: res.data.bar, donut: res.data.donut });
     } catch (error) {
       console.error(error);

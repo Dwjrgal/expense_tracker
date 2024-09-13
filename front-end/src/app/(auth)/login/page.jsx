@@ -7,6 +7,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import Link from "next/link";
 import Loader from "@/app/loader/page";
+import { apiUrl } from "@/app/utils/util";
 
 const LogIn = () => {
   const router = useRouter();
@@ -21,7 +22,7 @@ const LogIn = () => {
 
     try {
       setIsLoading(true);
-      const response = await axios.post("http://localhost:8008/auth/signin", {
+      const response = await axios.post(`${apiUrl}/auth/signin`, {
         email,
         password,
       });
