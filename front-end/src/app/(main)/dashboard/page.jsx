@@ -8,7 +8,6 @@ import { toast } from "react-toastify";
 import { RxDotFilled } from "react-icons/rx";
 import { IoArrowUpCircleSharp, IoArrowDownCircleSharp } from "react-icons/io5";
 import BarChart from "@/app/components/dashboard/BarChart";
-
 import {
   ArcElement,
   BarElement,
@@ -18,17 +17,16 @@ import {
   LinearScale,
 } from "chart.js";
 import DoughnurChart from "@/app/components/dashboard/Doughnut";
+import { DashboardContext } from "@/app/context/dashboard_context";
 Chart.register(CategoryScale, LinearScale, BarElement, ArcElement, Legend);
 
 const Dashboard = () => {
   const { user } = useContext(UserContext);
   const [transactions, setTransactions] = useState([]);
   const [cardValue, setCardValue] = useState({});
-  const [trType, setTrType] = useState(transactions.transaction_type);
-
   const fetchTransactions = async () => {
     try {
-      const res = await axios.get("http://localhost:8008/records/");
+      const res = await axios.get("http://localhost:8008/records");
       setTransactions(res.data.records);
     } catch (error) {
       console.error(error);
@@ -51,9 +49,7 @@ const Dashboard = () => {
     getCardData();
   }, [user]);
 
-  console.log("Card data", cardValue);
-  console.log("transaction data:", transactions)
-  console.log("tr", trType)
+  console.log("trasactions", transactions);
   return (
     <section className="bg-slate-200 w-full h-full px-10 flex justify-center">
       <div className=" flex  gap-2 pt-5 flex-col">
@@ -108,8 +104,10 @@ const Dashboard = () => {
                   </div>
                 </div>
                 <span
-                  className={`pr-4  text-[11px]${
-                    tr.transaction_type === "EXP" ? "text-red-500" : "text-green-500"
+                  className={`pr-4  text-[11px] text-green-400 ${
+                    tr.transaction_type === "EXP"
+                      ? "text-red-500"
+                      : "text-green-500"
                   }`}
                 >
                   {tr.amount}

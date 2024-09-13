@@ -1,7 +1,11 @@
 const sql = require("../config/db");
-const getAllCategory = (req, res) => {
-  // postgre select
-  res.status(200).json({});
+const getAllCategory = async (req, res) => {
+  try {
+    const data = await sql`SELECT name FROM categories`;
+    res.status(200).json({ data });
+  } catch (error) {
+    res.status(400).json({ message: "Failed ", error });
+  }
 };
 
 const createCategory = async (req, res) => {

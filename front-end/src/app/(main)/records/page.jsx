@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaRegCircleDot } from "react-icons/fa6";
 import { SlArrowLeft } from "react-icons/sl";
 import { SlArrowRight } from "react-icons/sl";
@@ -9,14 +9,29 @@ import { GrEmptyCircle } from "react-icons/gr";
 import RecordModal from "@/app/components/record-modal";
 import { CategoryModal } from "@/app/components";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const Records = () => {
   const [categoryName, setCategoryName] = useState([]);
+  const [categories, setCategories] = useState([]);
+
+  const getCategories = async (req, res) => {
+    try {
+      const token = localStorage.getItem("token");
+      const res = await axios.get("http://localhost:8008/categories");
+      setCategories(res.data);
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to fetch ", error);
+    }
+  };
 
   const addCategory = async () => {
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.post("http://localhost:8008/categories",
+      console.log("Token", token);
+      const res = await axios.post(
+        "http://localhost:8008/categories",
         {
           name: categoryName,
         },
@@ -31,6 +46,11 @@ const Records = () => {
       console.log("error", error);
     }
   };
+
+  useEffect(() => {
+    getCategories();
+  });
+  console.log("categories", categories);
   return (
     <>
       <section className="flex justify-center gap-5 bg-slate-100  w-full">
@@ -79,10 +99,11 @@ const Records = () => {
           </div>
           <div className="flex flex-col gap-1">
             <div className="flex gap-3 items-center font-normal text-gray-700 ml-2 text-[11px]">
-              <IoEye /><h4>{categoryName}</h4>
-              {/* {categoryName.map((ct) =>(
-              <h4>{ct.name}</h4>
-              ))} */}
+              {categories.map((ct) => (
+                <h5>{ct.name}</h5>
+              ))}
+              <IoEye />
+              <h4>{categoryName}</h4>
             </div>
             <CategoryModal
               setCategoryName={setCategoryName}
