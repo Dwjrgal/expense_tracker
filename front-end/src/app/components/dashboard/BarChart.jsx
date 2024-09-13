@@ -2,7 +2,8 @@ import axios from "axios";
 import { plugins } from "chart.js";
 import { useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
-import { RxBorderWidth } from "react-icons/rx";
+import { IoRadioButtonOnSharp } from "react-icons/io5";
+import { RxBorderSolid, RxBorderWidth } from "react-icons/rx";
 
 const BarChart = ({}) => {
   const [chartValue, setChartValue] = useState(null);
@@ -43,7 +44,7 @@ const BarChart = ({}) => {
 
   const options1 = {
     plugins: {
-      innerWidth: 8,
+      innerWidth: 2,
     },
   };
   console.log("ChartValue", chartValue);
