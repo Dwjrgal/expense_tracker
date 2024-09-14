@@ -1,8 +1,36 @@
 import React, { useState } from "react";
 import { PiPlusThin } from "react-icons/pi";
+import { apiUrl } from "../utils/util";
 
-const RecordModal = () => {
+const RecordModal = ({ categories }) => {
   const [activeTab, setActiveTab] = useState("INC");
+  const [recordFormData, setRecordFormData] = useState({
+    name: "",
+    amount: 0,
+    cid: "",
+    uid: "",
+    transaction_type: "EXP",
+    description: "",
+  });
+
+  const handleChangeForm = (e) => {
+    setRecordFormData({ ...recordFormData, [e.target.name]: e.target.value });
+  };
+
+
+  const addRecordData = async () =>{
+    const newData = {
+      ...recordFormData,
+        transaction_type: activeTab,
+    }
+    try {
+       const res = await axios.post( `${apiUrl}/records`),{
+        
+      }
+      
+    } catch (error) {
+      
+  } 
   return (
     <div>
       <button
@@ -49,18 +77,21 @@ const RecordModal = () => {
                 <p className="font-semibold text-xs mb-1">Amount</p>
                 <input
                   type="text"
+                  name="amount"
                   placeholder="$ 000"
                   className="input input-bordered w-full h-14 bg-slate-100"
                 />
                 <h4 className="font-semibold pt-3 pb-1 text-xs">Category</h4>
-                <select className="w-full max-w-xs select input-bordered bg-slate-100 text-xs">
+                <select
+                  className="w-full max-w-xs select input-bordered bg-slate-100 text-xs"
+                  onChange={handleChangeForm}
+                >
                   <option disabled selected>
                     Choose
                   </option>
-                  <option value="food">Food</option>
-                  <option value="drink">Drink</option>
-                  <option value="rent">Rent</option>
-                  <option value="other">Other</option>
+                  {categories?.map((c) => (
+                    <option value={c.id}>{c.name}</option>
+                  ))}
                 </select>
                 <div className="flex gap-4 mt-3 w-72">
                   <input
@@ -76,6 +107,7 @@ const RecordModal = () => {
                   className={` h-8  w-72 border rounded-full mt-4 mb-5 text-sm  ${
                     activeTab === "EXP" ? "bg-blue-700" : "bg-lime-600"
                   } text-white w-full`}
+                  onClick={addRecordData}
                 >
                   Add Record{" "}
                 </button>

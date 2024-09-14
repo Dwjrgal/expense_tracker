@@ -14,16 +14,17 @@ import { apiUrl } from "@/app/utils/util";
 
 const Records = () => {
   const [categoryName, setCategoryName] = useState([]);
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState(null);
 
   const getCategories = async (req, res) => {
     try {
-      const token = localStorage.getItem("token");
       const res = await axios.get(`${apiUrl}/categories`);
-      setCategories(res.data);
+
+      console.log("categories", res.data);
+      setCategories(res.data.data);
     } catch (error) {
       console.error(error);
-      toast.error("Failed to fetch ", error);
+      toast.error("Failed to fetch categories", error);
     }
   };
 
@@ -50,14 +51,15 @@ const Records = () => {
 
   useEffect(() => {
     getCategories();
-  });
+  }, []);
   console.log("categories", categories);
+
   return (
     <>
-      <section className="flex justify-center gap-5 bg-slate-100  w-full">
+      <section className="flex justify-center gap-5 bg-slate-100  w-full h-full">
         <section className="bg-white rounded flex flex-col gap-4 pt-4 px-4 mt-5 ml-12 w-[180px]">
           <h3 className="text-sm font-bold">Records</h3>
-          <RecordModal />
+          <RecordModal categories={categories} />
           <input
             type="text"
             placeholder="Search"
@@ -99,13 +101,12 @@ const Records = () => {
             <p className="text-gray-500 text-[12px]">Clear</p>
           </div>
           <div className="flex flex-col gap-1">
-            <div className="flex gap-3 items-center font-normal text-gray-700 ml-2 text-[11px]">
-              {categories.map((ct) => (
-                <h5>{ct.name}</h5>
-              ))}
-              <IoEye />
-              <h4>{categoryName}</h4>
-            </div>
+            {categories?.map((ct) => (
+              <div className="flex gap-3 items-center font-normal text-gray-700 ml-2 text-[11px]">
+                <IoEye />
+                <h4>{ct.name}</h4>
+              </div>
+            ))}
             <CategoryModal
               setCategoryName={setCategoryName}
               addCategory={addCategory}
