@@ -23,14 +23,18 @@ const RecordModal = ({ categories }) => {
       ...recordFormData,
         transaction_type: activeTab,
     }
+
+    console.log ("new data", newData)
     try {
-       const res = await axios.post( `${apiUrl}/records`),{
-        
-      }
-      
+       const res = await axios.post( `${apiUrl}/records`);
+       if(res.status ===201) {
+        toast.success("Record amjilttai nemegdlee")
+       }
     } catch (error) {
+      toast.error("Record nemeh uyd aldaa garlaa")
       
   } 
+
   return (
     <div>
       <button
@@ -84,6 +88,7 @@ const RecordModal = ({ categories }) => {
                 <h4 className="font-semibold pt-3 pb-1 text-xs">Category</h4>
                 <select
                   className="w-full max-w-xs select input-bordered bg-slate-100 text-xs"
+                  name="cid"
                   onChange={handleChangeForm}
                 >
                   <option disabled selected>
@@ -119,6 +124,7 @@ const RecordModal = ({ categories }) => {
       </dialog>
     </div>
   );
-};
+}
+}
 
 export default RecordModal;
