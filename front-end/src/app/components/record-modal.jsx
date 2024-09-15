@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { PiPlusThin } from "react-icons/pi";
 import { apiUrl } from "../utils/util";
+import { headers } from "next/headers";
 
 const RecordModal = ({ categories }) => {
   const [activeTab, setActiveTab] = useState("INC");
@@ -24,9 +25,15 @@ const RecordModal = ({ categories }) => {
         transaction_type: activeTab,
     }
 
-    console.log ("new data", newData)
+    console.log ("new data", newData);
+    const token = localStorage.getItem("token")
     try {
-       const res = await axios.post( `${apiUrl}/records`);
+       const res = await axios.post( `${apiUrl}/records`, newData,{
+        headers: {
+          Authorization: `Bearer ${token}`
+         }
+       });
+    
        if(res.status ===201) {
         toast.success("Record amjilttai nemegdlee")
        }
