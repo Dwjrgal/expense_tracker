@@ -12,7 +12,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { apiUrl } from "@/app/utils/util";
 
-const Records = () => {
+const Records = ({ recordFormData }) => {
   const [categoryName, setCategoryName] = useState([]);
   const [categories, setCategories] = useState(null);
 
@@ -103,13 +103,13 @@ const Records = () => {
             {categories?.map((ct) => (
               <div className="flex gap-3 items-center font-normal text-gray-700 ml-2 text-[11px]">
                 <IoEye />
-                <h4>{ct.name}</h4>
+                <h4>{ct?.name}</h4>
               </div>
             ))}
-            <CategoryModal
+            {/* <CategoryModal
               setCategoryName={setCategoryName}
               addCategory={addCategory}
-            />
+            /> */}
           </div>
         </section>
         <section className="pt-5 w-[600px]">
@@ -128,13 +128,16 @@ const Records = () => {
           <p className="font-semibold pb-3 text-sm">Today</p>
           <section className="bg-white rounded  pt-3">
             <div className="flex items-center justify-between border-solid rounded-lg h-8 border-gray gap-2 pt-4 pb-4 ml-4">
-              <div className="flex gap-3">
-                <img className="h-6" src="./img/Home.png"></img>
-                <div className="flex flex-col text-xs">
-                  <h4 className="font-normal">Lending& Renting</h4>
-                  <p className="text-[9px] text-gray-500">14:00</p>
+              {recordFormData?.map((rf) => (
+                <div className="flex gap-3">
+                  <img className="h-6" src="./img/Home.png"></img>
+                  <div className="flex flex-col text-xs">
+                    <h4 className="font-normal">{rf.name}</h4>
+                    <p className="text-[9px] text-gray-500">14:00</p>
+                  </div>
                 </div>
-              </div>
+              ))}
+
               <span className="text-green-400 pr-4 text-sm"></span>
             </div>
           </section>
