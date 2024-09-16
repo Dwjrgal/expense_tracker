@@ -28,20 +28,18 @@ const Records = () => {
     }
   };
 
-  const addCategory = async () => {
+  const addCategory = async (req, res) => {
     try {
-      const token = localStorage.getItem("token");
-      console.log("Token", token);
       const res = await axios.post(
         `${apiUrl}/categories`,
         {
           name: categoryName,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
         }
+        // {
+        //   headers: {
+        //     Authorization: `Bearer ${token}`,
+        //   },
+        // }
       );
       console.log("success add category");
     } catch (error) {
@@ -51,6 +49,7 @@ const Records = () => {
 
   useEffect(() => {
     getCategories();
+    addCategory();
   }, []);
   console.log("categories", categories);
 
@@ -59,12 +58,12 @@ const Records = () => {
       <section className="flex justify-center gap-5 bg-slate-100  w-full h-full">
         <section className="bg-white rounded flex flex-col gap-4 pt-4 px-4 mt-5 ml-12 w-[180px]">
           <h3 className="text-sm font-bold">Records</h3>
-          <RecordModal categories={categories} />
           <input
             type="text"
             placeholder="Search"
             className="rounded pl-2 bg-slate-100 border text-xs"
           />
+          <RecordModal categories={categories} />
           <div className="flex flex-col gap-3 text-gray-700">
             <h5 className="font-semibold text-xs">Types</h5>
             <ul className="text-[11px] font-normal pl-5">

@@ -18,6 +18,8 @@ import {
 } from "chart.js";
 import DoughnurChart from "@/app/components/dashboard/Doughnut";
 import { DashboardContext } from "@/app/context/dashboard_context";
+import { CategoryModal } from "@/app/components";
+import RecordModal from "@/app/components/record-modal";
 Chart.register(CategoryScale, LinearScale, BarElement, ArcElement, Legend);
 
 const Dashboard = () => {
@@ -31,7 +33,7 @@ const Dashboard = () => {
     } catch (error) {
       console.error(error);
       toast.error("Failed to fetch transactions");
-      console.log ("error", error)
+      console.log("error", error);
     }
   };
 

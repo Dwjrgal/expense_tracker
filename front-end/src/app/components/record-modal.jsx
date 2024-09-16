@@ -1,7 +1,9 @@
+"use client";
+
 import React, { useState } from "react";
 import { PiPlusThin } from "react-icons/pi";
 import { apiUrl } from "../utils/util";
-import { headers } from "next/headers";
+// import { headers } from "next/headers";
 
 const RecordModal = ({ categories }) => {
   const [activeTab, setActiveTab] = useState("INC");
@@ -10,7 +12,7 @@ const RecordModal = ({ categories }) => {
     amount: 0,
     cid: "",
     uid: "",
-    transaction_type: "EXP",
+    // transaction_type: "EXP",
     description: "",
   });
 
@@ -18,34 +20,32 @@ const RecordModal = ({ categories }) => {
     setRecordFormData({ ...recordFormData, [e.target.name]: e.target.value });
   };
 
-
-  const addRecordData = async () =>{
+  const addRecordData = async () => {
     const newData = {
       ...recordFormData,
-        transaction_type: activeTab,
-    }
+      transaction_type: activeTab,
+    };
 
-    console.log ("new data", newData);
-    const token = localStorage.getItem("token")
+    console.log("new data", newData);
+    const token = localStorage.getItem("token");
     try {
-       const res = await axios.post( `${apiUrl}/records`, newData,{
+      const res = await axios.post(`${apiUrl}/records`, newData, {
         headers: {
-          Authorization: `Bearer ${token}`
-         }
-       });
-    
-       if(res.status ===201) {
-        toast.success("Record amjilttai nemegdlee")
-       }
-    } catch (error) {
-      toast.error("Record nemeh uyd aldaa garlaa")
-      
-  } 
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
+      if (res.status === 201) {
+        toast.success("Record amjilttai nemegdlee");
+      }
+    } catch (error) {
+      toast.error("Record nemeh uyd aldaa garlaa");
+    }
+  };
   return (
-    <div>
+    <>
       <button
-        className=" w-[150px] h-5 bg-blue-600 rounded-xl text-white  flex justify-center items-center gap-1 text-xs"
+        className=" w-[150px] h-5 bg-blue-600 rounded-xl  flex justify-center items-center gap-1 text-xs"
         onClick={() => document.getElementById("my_modal_3").showModal()}
       >
         <PiPlusThin className="text-white text-lg" />
@@ -124,14 +124,12 @@ const RecordModal = ({ categories }) => {
                   Add Record{" "}
                 </button>
               </div>
-              {/* <LeftSide /> */}
             </div>
           </div>
         </div>
       </dialog>
-    </div>
+    </>
   );
-}
-}
+};
 
 export default RecordModal;
