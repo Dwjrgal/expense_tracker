@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FaRegCircleDot } from "react-icons/fa6";
 import { SlArrowLeft } from "react-icons/sl";
 import { SlArrowRight } from "react-icons/sl";
@@ -11,8 +11,10 @@ import { CategoryModal } from "@/app/components";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { apiUrl } from "@/app/utils/util";
+import { DashboardContext } from "@/app/context/dashboard_context";
 
-const Records = ({ recordFormData }) => {
+const Records = ({ children }) => {
+  const { recordFormData } = useContext(DashboardContext);
   const [categoryName, setCategoryName] = useState([]);
   const [categories, setCategories] = useState(null);
 
@@ -106,10 +108,10 @@ const Records = ({ recordFormData }) => {
                 <h4>{ct?.name}</h4>
               </div>
             ))}
-            {/* <CategoryModal
+            <CategoryModal
               setCategoryName={setCategoryName}
               addCategory={addCategory}
-            /> */}
+            />
           </div>
         </section>
         <section className="pt-5 w-[600px]">
