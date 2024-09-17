@@ -1,22 +1,54 @@
 "use client";
-
-import React, { useContext, useState } from "react";
-import { PiPlusThin } from "react-icons/pi";
+import { useContext, useState } from "react";
+import axios from "axios";
 import { apiUrl } from "../utils/util";
 import { toast } from "react-toastify";
-import axios from "axios";
 import { DashboardContext } from "../context/dashboard_context";
-// import { headers } from "next/headers";
+import { PiPlusThin } from "react-icons/pi";
 
-const RecordModal = ({ categories }) => {
+const RecordModal = ({ children }) => {
+  const { categories } = useContext(DashboardContext);
+  const { handleClose } = useContext(DashboardContext);
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <>
+      <button
+            className=" w-[150px] h-5 bg-blue-600 text-white rounded-xl  flex justify-center items-center gap-1 text-xs"
+            onClick={() => setIsOpen(true)}
+          >
+            <PiPlusThin className="text-white text-lg" />
+            Add
+          </button>
+    <dialog open={isOpen} className="modal">
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+        <div className="modal-box max-w-[800px]">
+          <button
+            className="absolute btn btn-sm btn-circle btn-ghost right-2 top-2"
+            onClick={() =>setIsOpen(false)}
+          >
+            ✕
+          </button>
+          <h3 className="text-lg font-bold">Add Record</h3>
+          <div className="divider"></div>
+          <div className="flex gap-12">
+            <RightSide categories={categories} />
+            <LeftSide />
+          </div>
+        </div>
+      </div>
+    </dialog>
+    </>
+  );
+};
+
+export const RightSide = ({ categories }) => {
   const [activeTab, setActiveTab] = useState("INC");
   const [recordFormData, setRecordFormData] = useState({
-    uid: "40cc8213-eae4-4edd-a2af-786296162da9",
-    cid: "bb5ad933-ff87-43cc-8834-e120cfa557a0",
     name: "",
     amount: 0,
-    transaction_type: "",
-    // description: "",
+    cid: "",
+    uid: "329ba2e1-ac59-40d8-9e0b-d5b32fb57455",
+    description: "",
   });
 
   const handleChangeForm = (e) => {
@@ -28,8 +60,7 @@ const RecordModal = ({ categories }) => {
       ...recordFormData,
       transaction_type: activeTab,
     };
-
-    console.log("new data", newData);
+    console.log("DD", newData);
     const token = localStorage.getItem("token");
     try {
       const res = await axios.post(`${apiUrl}/records`, newData, {
@@ -37,104 +68,104 @@ const RecordModal = ({ categories }) => {
           Authorization: `Bearer ${token}`,
         },
       });
-
       if (res.status === 201) {
         toast.success("Record amjilttai nemegdlee");
       }
     } catch (error) {
-      console.log("error", error);
       toast.error("Record nemeh uyd aldaa garlaa");
     }
   };
-  console.log("recorddata", recordFormData);
-  return (
-    <>
-      <button
-        className=" w-[150px] h-5 bg-blue-600 text-white rounded-xl  flex justify-center items-center gap-1 text-xs"
-        onClick={() => document.getElementById("my_modal_3").showModal()}
-      >
-        <PiPlusThin className="text-white text-lg" />
-        Add
-      </button>
-      <dialog id="my_modal_3" className="modal w-[400px]">
-        <div className="modal-box pr-7">
-          <form method="dialog">
-            <button className="btn btn-sm btn-circle absolute right-2 top-2 py-4">
-              ✕
-            </button>
-          </form>
-          <h3 className="font-bold text-sm pb-5">Add Records</h3>
-          <div className="w-60 h-60 flex flex-col px-5">
-            <div className="flex join">
-              <button
-                className={`join-item btn border rounded-full  w-36 ${
-                  activeTab === "EXP"
-                    ? "bg-blue-700 text-white"
-                    : "bg-slate-200 text-black"
-                }`}
-                onClick={() => setActiveTab("EXP")}
-              >
-                Expense
-              </button>
 
-              <button
-                className={`join-item btn border rounded-full w-36 ${
-                  activeTab === "INC"
-                    ? "bg-lime-600 text-white"
-                    : "bg-slate-200 text-black"
-                }`}
-                onClick={() => setActiveTab("INC")}
-              >
-                Income
-              </button>
-            </div>
-            <div>
-              <div className="flex flex-col mt-5 w-72">
-                <p className="font-semibold text-xs mb-1">Amount</p>
-                <input
-                  type="text"
-                  name="amount"
-                  placeholder="$ 000"
-                  className="input input-bordered w-full h-14 bg-slate-100"
-                  onChange={handleChangeForm}
-                />
-                <h4 className="font-semibold pt-3 pb-1 text-xs">Category</h4>
-                <select
-                  className="w-full max-w-xs select input-bordered bg-slate-100 text-xs"
-                  name="cid"
-                  onChange={handleChangeForm}
-                >
-                  <option disabled selected>
-                    Choose
-                  </option>
-                  {categories?.map((c) => (
-                    <option value={c.id}>{c.name}</option>
-                  ))}
-                </select>
-                <div className="flex gap-4 mt-3 w-72">
-                  <input
-                    type="date"
-                    className="w-[136px] max-w-xs input input-bordered bg-slate-100 text-xs"
-                  />
-                  <input
-                    type="time"
-                    className="w-[135px] max-w-xs input input-bordered bg-slate-100 text-xs"
-                  />
-                </div>
-                <button
-                  className={` h-8  w-72 border rounded-full mt-4 mb-5 text-sm  ${
-                    activeTab === "EXP" ? "bg-blue-700" : "bg-lime-600"
-                  } text-white w-full`}
-                  onClick={addRecordData}
-                >
-                  Add Record{" "}
-                </button>
-              </div>
-            </div>
+  return (
+    <div className="w-2/5">
+      <div className="flex mb-3 space-x-1 bg-gray-200 rounded-full">
+        <button
+          className={`px-11 py-2 rounded-full transition-colors duration-300 ${
+            activeTab === "EXP"
+              ? "bg-blue-700 text-white"
+              : "bg-transparent text-black"
+          }`}
+          onClick={() => setActiveTab("EXP")}
+        >
+          Expense
+        </button>
+        <button
+          className={`px-11 py-2 rounded-full transition-colors duration-300 ${
+            activeTab === "INC"
+              ? "bg-lime-600 text-white"
+              : "bg-transparent text-black"
+          }`}
+          onClick={() => setActiveTab("INC")}
+        >
+          Income
+        </button>
+      </div>
+      <div className="flex flex-col w-full gap-4">
+        <input
+          type="text"
+          name="name"
+          placeholder="name"
+          className="input input-bordered"
+          onChange={handleChangeForm}
+        />
+        <input
+          type="text"
+          name="amount"
+          placeholder="Amount"
+          className="input input-bordered"
+          onChange={handleChangeForm}
+        />
+        <div className="flex flex-col">
+          <label>Category</label>
+          <select
+            className="select select-bordered"
+            name="cid"
+            onChange={handleChangeForm}
+          >
+            <option disabled selected>
+              Choose
+            </option>
+            {categories?.map((c) => (
+              <option value={c.id}>{c.name}</option>
+            ))}
+          </select>
+        </div>
+        <div className="flex gap-3">
+          <div className="flex flex-col">
+            <label>Date</label>
+            <input type="date" className="input input-bordered" />
+          </div>
+          <div className="flex flex-col">
+            <label>Time</label>
+            <input type="time" className="input input-bordered" />
           </div>
         </div>
-      </dialog>
-    </>
+      </div>
+      <div className="mt-3">
+        <button
+          className={`btn ${
+            activeTab === "EXP" ? "bg-blue-700" : "bg-lime-600"
+          } text-white w-full`}
+          onClick={addRecordData}
+        >
+          Add Record
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export const LeftSide = () => {
+  return (
+    <div className="flex flex-col w-3/5 gap-3">
+      <label>Note</label>
+      <textarea
+        name="note"
+        id="note"
+        className="h-[280px] textarea textarea-bordered"
+        placeholder="Write here"
+      ></textarea>
+    </div>
   );
 };
 

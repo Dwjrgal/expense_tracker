@@ -14,86 +14,51 @@ import { apiUrl } from "@/app/utils/util";
 import { DashboardContext } from "@/app/context/dashboard_context";
 
 const Records = ({}) => {
-  const [categoryName, setCategoryName] = useState([]);
-  const [categories, setCategories] = useState(null);
-  const [recordFormData, setRecordFormData] = useState({
-    uid: "40cc8213-eae4-4edd-a2af-786296162da9",
-    cid: "bb5ad933-ff87-43cc-8834-e120cfa557a0",
-    name: "",
-    amount: 0,
-    transaction_type: "",
-    // description: "",
-  });
+  // const [categoryName, setCategoryName] = useState([]);
+  // const [categories, setCategories] = useState(null);
+  const {transactions} = useContext(DashboardContext)
+  const {categories} = useContext(DashboardContext)
+  const {categoryName} = useContext(DashboardContext)
+  const {addCategory} = useContext(DashboardContext)
 
-  const handleChangeForm = (e) => {
-    setRecordFormData({ ...recordFormData, [e.target.name]: e.target.value });
-  };
+  // const getCategories = async (req, res) => {
+  //   try {
+  //     const res = await axios.get(`${apiUrl}/categories`);
 
-  const addRecordData = async () => {
-    const newData = {
-      ...recordFormData,
-      transaction_type: activeTab,
-    };
+  //     console.log("categories", res.data);
+  //     setCategories(res.data.data);
+  //   } catch (error) {
+  //     console.error(error);
+  //     toast.error("Failed to fetch categories", error);
+  //   }
+  // };
 
-    console.log("new data", newData);
-    const token = localStorage.getItem("token");
-    try {
-      const res = await axios.post(`${apiUrl}/records`, newData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+  // const addCategory = async (req, res) => {
+  //   try {
+  //     const res = await axios.post(
+  //       `${apiUrl}/categories`,
+  //       {
+  //         name: categoryName,
+  //       }
+  //       // {
+  //       //   headers: {
+  //       //     Authorization: `Bearer ${token}`,
+  //       //   },
+  //       // }
+  //     );
+  //     console.log("success add category");
+  //   } catch (error) {
+  //     console.log("error", error);
+  //   }
+  // };
 
-      if (res.status === 201) {
-        toast.success("Record amjilttai nemegdlee");
-      }
-    } catch (error) {
-      console.log("error", error);
-      toast.error("Record nemeh uyd aldaa garlaa");
-    }
-  };
-
-  const getCategories = async (req, res) => {
-    try {
-      const res = await axios.get(`${apiUrl}/categories`);
-
-      console.log("categories", res.data);
-      setCategories(res.data.data);
-    } catch (error) {
-      console.error(error);
-      toast.error("Failed to fetch categories", error);
-    }
-  };
-
-  const addCategory = async (req, res) => {
-    try {
-      const res = await axios.post(
-        `${apiUrl}/categories`,
-        {
-          name: categoryName,
-        }
-        // {
-        //   headers: {
-        //     Authorization: `Bearer ${token}`,
-        //   },
-        // }
-      );
-      console.log("success add category");
-    } catch (error) {
-      console.log("error", error);
-    }
-  };
-
-  useEffect(() => {
-    getCategories();
-    addCategory();
-  }, []);
-  console.log("categories", categories);
-  console.log("recordformdata:", recordFormData);
-
+  // useEffect(() => {
+  //   getCategories();
+  //   addCategory();
+  // }, []);
   return (
     <>
-      <section className="flex justify-center gap-5 bg-slate-100  w-full h-full">
+      <section className="flex justify-center gap-5 bg-slate-100  w-full h-full pb-8">
         <section className="bg-white rounded flex flex-col gap-4 pt-4 px-4 mt-5 ml-12 w-[180px]">
           <h3 className="text-sm font-bold">Records</h3>
           <input
@@ -101,7 +66,7 @@ const Records = ({}) => {
             placeholder="Search"
             className="rounded pl-2 bg-slate-100 border text-xs"
           />
-          <RecordModal categories={categories} />
+          <RecordModal/>
           <div className="flex flex-col gap-3 text-gray-700">
             <h5 className="font-semibold text-xs">Types</h5>
             <ul className="text-[11px] font-normal pl-5">
@@ -144,10 +109,10 @@ const Records = ({}) => {
                 <h4>{ct?.name}</h4>
               </div>
             ))}
-            <CategoryModal
-              setCategoryName={setCategoryName}
-              addCategory={addCategory}
-            />
+            <CategoryModal/>
+              {/* // setCategoryName={setCategoryName}
+              // addCategory={addCategory}
+             */}
           </div>
         </section>
         <section className="pt-5 w-[600px]">
@@ -164,20 +129,30 @@ const Records = ({}) => {
             </h5>
           </div>
           <p className="font-semibold pb-3 text-sm">Today</p>
+          <section className="flex flex-col gap-2 ">
+          {transactions?.map((tr) => (
           <section className="bg-white rounded  pt-3">
-            <div className="flex items-center justify-between border-solid rounded-lg h-8 border-gray gap-2 pt-4 pb-4 ml-4">
-              {transactions?.map((rf) => (
-                <div className="flex gap-3">
+            <div className="flex justify-between border-solid rounded-lg h-8 border-gray gap-2 pt-4 pb-4 ml-4">
+             
+                <div className="flex gap-3 items-center">
                   <img className="h-6" src="./img/Home.png"></img>
                   <div className="flex flex-col text-xs">
-                    <h4 className="font-normal">{rf.name}</h4>
+                    <h4 className="font-normal">{tr.name}</h4>
                     <p className="text-[9px] text-gray-500">14:00</p>
                   </div>
                 </div>
-              ))}
-
-              <span className="text-green-400 pr-4 text-sm"></span>
+                <span
+                  className={`pr-4  text-[11px] text-green-400 flex items-center ${
+                    tr.transaction_type === "EXP"
+                      ? "text-red-500"
+                      : "text-green-500"
+                  }`}
+                >
+                  {tr.amount}
+                </span>
             </div>
+          </section>
+          ))}
           </section>
         </section>
       </section>

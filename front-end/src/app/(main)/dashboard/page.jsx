@@ -54,7 +54,7 @@ const Dashboard = () => {
 
   console.log("trasactions", transactions);
   return (
-    <section className="bg-slate-200 w-full h-full px-10 flex justify-center">
+    <section className="bg-slate-200 w-full h-full px-10  pb-8 flex justify-center">
       <div className=" flex  gap-2 pt-5 flex-col">
         <div className="flex gap-2">
           <img src="./img/Card.png" alt="" className="w-[250px] h-36" />
@@ -98,7 +98,7 @@ const Dashboard = () => {
           <section className="bg-white rounded pt-3">
             <h3 className="font-semibold pb-3 pl-4 text-sm">Last Records</h3>
             {transactions?.map((tr) => (
-              <div className=" h-10 flex items-center justify-between border-solid border-t-[1px] border-gray gap-2 ml-5 pt-3 mb-3">
+              <div className=" h-10 flex items-center justify-between border-solid border-t-[1px] border-gray gap-2 ml-5  py-3">
                 <div className="flex gap-3">
                   <img className="h-6" src="./img/Home.png"></img>
                   <div className="flex flex-col text-xs">

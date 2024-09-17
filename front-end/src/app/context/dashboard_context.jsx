@@ -1,58 +1,90 @@
 "use client";
 
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { apiUrl } from "../utils/util";
+import { UserContext } from "./user-context";
 
 export const DashboardContext = createContext();
 
 export const DashboardProvider = ({ children }) => {
-  // const [activeTab, setActiveTab] = useState("INC");
-  const [recordFormData, setRecordFormData] = useState({
-    uid: "40cc8213-eae4-4edd-a2af-786296162da9",
-    cid: "bb5ad933-ff87-43cc-8834-e120cfa557a0",
-    name: "",
-    amount: 0,
-    transaction_type: "",
-    // description: "",
-  });
+  const { user } = useContext(UserContext);
+  const [transactions, setTransactions] = useState([]);
+  const [categoryName, setCategoryName] = useState([]);
+  const [categories, setCategories] = useState(null);
+ 
+  
+  const handleClose = () => {
+    setIsOpen(false);
+  };
+  
+  const getCategories = async (req, res) => {
+    try {
+      const res = await axios.get(`${apiUrl}/categories`);
 
-  const handleChangeForm = (e) => {
-    setRecordFormData({ ...recordFormData, [e.target.name]: e.target.value });
+      console.log("categories", res.data);
+      setCategories(res.data.data);
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to fetch categories", error);
+    }
   };
 
-  const addRecordData = async () => {
-    const newData = {
-      ...recordFormData,
-      transaction_type: activeTab,
-    };
-
-    console.log("new data", newData);
-    const token = localStorage.getItem("token");
+  const addCategory = async (req, res) => {
     try {
-      const res = await axios.post(`${apiUrl}/records`, newData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      if (res.status === 201) {
-        toast.success("Record amjilttai nemegdlee");
-      }
+      const res = await axios.post(
+        `${apiUrl}/categories`,
+        {
+          name: categoryName,
+        }
+        // {
+        //   headers: {
+        //     Authorization: `Bearer ${token}`,
+        //   },
+        // }
+      );
+      console.log("success add category");
     } catch (error) {
       console.log("error", error);
-      toast.error("Record nemeh uyd aldaa garlaa");
     }
   };
 
   useEffect(() => {
-    handleChangeForm();
-    addRecordData();
+    getCategories();
+    addCategory();
   }, []);
+
+
+  const fetchTransactions = async () => {
+    try {
+      const res = await axios.get(`${apiUrl}/records`);
+      setTransactions(res.data.records);
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to fetch transactions");
+      console.log("error", error);
+    }
+  };
+  const getCardData = async () => {
+    try {
+      const res = await axios.get(`${apiUrl}/records/value`);
+      console.log("ST", res.data);
+      setCardValue(res.data);
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to fetch transactions");
+    }
+  };
+  useEffect(() => {
+    fetchTransactions();
+    getCardData();
+  }, [user]);
+
+  
 
   return (
     <DashboardContext.Provider
-      value={{ recordFormData, handleChangeForm, addRecordData }}
+      value={{transactions, fetchTransactions, categories, addCategory, categoryName , handleClose}}
     >
       {children}
     </DashboardContext.Provider>

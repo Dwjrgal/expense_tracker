@@ -13,10 +13,10 @@ const Layout = ({ children }) => {
     fetchUserData();
   }, []);
 
-  // const logOut = () => {
-  //   localStorage.removeItem("token");
-  //   router.push("/login");
-  // };
+  const logOut = () => {
+    localStorage.removeItem("token");
+    router.push("/login");
+  };
 
   // if (!user ) {
   //   redirect("/login")
