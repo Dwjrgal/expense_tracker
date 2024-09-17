@@ -13,10 +13,45 @@ import { toast } from "react-toastify";
 import { apiUrl } from "@/app/utils/util";
 import { DashboardContext } from "@/app/context/dashboard_context";
 
-const Records = ({ children }) => {
-  const { recordFormData } = useContext(DashboardContext);
+const Records = ({}) => {
   const [categoryName, setCategoryName] = useState([]);
   const [categories, setCategories] = useState(null);
+  const [recordFormData, setRecordFormData] = useState({
+    uid: "40cc8213-eae4-4edd-a2af-786296162da9",
+    cid: "bb5ad933-ff87-43cc-8834-e120cfa557a0",
+    name: "",
+    amount: 0,
+    transaction_type: "",
+    // description: "",
+  });
+
+  const handleChangeForm = (e) => {
+    setRecordFormData({ ...recordFormData, [e.target.name]: e.target.value });
+  };
+
+  const addRecordData = async () => {
+    const newData = {
+      ...recordFormData,
+      transaction_type: activeTab,
+    };
+
+    console.log("new data", newData);
+    const token = localStorage.getItem("token");
+    try {
+      const res = await axios.post(`${apiUrl}/records`, newData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (res.status === 201) {
+        toast.success("Record amjilttai nemegdlee");
+      }
+    } catch (error) {
+      console.log("error", error);
+      toast.error("Record nemeh uyd aldaa garlaa");
+    }
+  };
 
   const getCategories = async (req, res) => {
     try {
@@ -54,6 +89,7 @@ const Records = ({ children }) => {
     addCategory();
   }, []);
   console.log("categories", categories);
+  console.log("recordformdata:", recordFormData);
 
   return (
     <>
@@ -130,7 +166,7 @@ const Records = ({ children }) => {
           <p className="font-semibold pb-3 text-sm">Today</p>
           <section className="bg-white rounded  pt-3">
             <div className="flex items-center justify-between border-solid rounded-lg h-8 border-gray gap-2 pt-4 pb-4 ml-4">
-              {recordFormData?.map((rf) => (
+              {transactions?.map((rf) => (
                 <div className="flex gap-3">
                   <img className="h-6" src="./img/Home.png"></img>
                   <div className="flex flex-col text-xs">

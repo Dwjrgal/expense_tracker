@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { PiPlusThin } from "react-icons/pi";
 import { apiUrl } from "../utils/util";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { DashboardContext } from "../context/dashboard_context";
 // import { headers } from "next/headers";
 
 const RecordModal = ({ categories }) => {
@@ -95,6 +96,7 @@ const RecordModal = ({ categories }) => {
                   name="amount"
                   placeholder="$ 000"
                   className="input input-bordered w-full h-14 bg-slate-100"
+                  onChange={handleChangeForm}
                 />
                 <h4 className="font-semibold pt-3 pb-1 text-xs">Category</h4>
                 <select
