@@ -13,30 +13,30 @@ const RecordModal = ({ children }) => {
   return (
     <>
       <button
-            className=" w-[150px] h-5 bg-blue-600 text-white rounded-xl  flex justify-center items-center gap-1 text-xs"
-            onClick={() => setIsOpen(true)}
-          >
-            <PiPlusThin className="text-white text-lg" />
-            Add
-          </button>
-    <dialog open={isOpen} className="modal">
-      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-        <div className="modal-box max-w-[800px]">
-          <button
-            className="absolute btn btn-sm btn-circle btn-ghost right-2 top-2"
-            onClick={() =>setIsOpen(false)}
-          >
-            ✕
-          </button>
-          <h3 className="text-lg font-bold">Add Record</h3>
-          <div className="divider"></div>
-          <div className="flex gap-12">
-            <RightSide categories={categories} />
-            <LeftSide />
+        className=" w-[150px] h-5 bg-blue-600 text-white rounded-xl  flex justify-center items-center gap-1 text-xs"
+        onClick={() => setIsOpen(true)}
+      >
+        <PiPlusThin className="text-white text-lg" />
+        Add
+      </button>
+      <dialog open={isOpen} className="modal">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="modal-box max-w-[800px]">
+            <button
+              className="absolute btn btn-sm btn-circle btn-ghost right-2 top-2"
+              onClick={() => setIsOpen(false)}
+            >
+              ✕
+            </button>
+            <h3 className="text-lg font-bold">Add Record</h3>
+            <div className="divider"></div>
+            <div className="flex gap-12">
+              <RightSide categories={categories} />
+              <LeftSide />
+            </div>
           </div>
         </div>
-      </div>
-    </dialog>
+      </dialog>
     </>
   );
 };

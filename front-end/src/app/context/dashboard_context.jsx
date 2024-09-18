@@ -4,6 +4,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { apiUrl } from "../utils/util";
 import { UserContext } from "./user-context";
+import { toast } from "react-toastify";
 
 export const DashboardContext = createContext();
 
@@ -12,12 +13,11 @@ export const DashboardProvider = ({ children }) => {
   const [transactions, setTransactions] = useState([]);
   const [categoryName, setCategoryName] = useState([]);
   const [categories, setCategories] = useState(null);
- 
-  
+
   const handleClose = () => {
     setIsOpen(false);
   };
-  
+
   const getCategories = async (req, res) => {
     try {
       const res = await axios.get(`${apiUrl}/categories`);
@@ -54,7 +54,6 @@ export const DashboardProvider = ({ children }) => {
     addCategory();
   }, []);
 
-
   const fetchTransactions = async () => {
     try {
       const res = await axios.get(`${apiUrl}/records`);
@@ -80,11 +79,16 @@ export const DashboardProvider = ({ children }) => {
     getCardData();
   }, [user]);
 
-  
-
   return (
     <DashboardContext.Provider
-      value={{transactions, fetchTransactions, categories, addCategory, categoryName , handleClose}}
+      value={{
+        transactions,
+        fetchTransactions,
+        categories,
+        addCategory,
+        setCategoryName,
+        handleClose,
+      }}
     >
       {children}
     </DashboardContext.Provider>

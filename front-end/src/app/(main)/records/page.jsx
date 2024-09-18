@@ -14,59 +14,21 @@ import { apiUrl } from "@/app/utils/util";
 import { DashboardContext } from "@/app/context/dashboard_context";
 
 const Records = ({}) => {
-  // const [categoryName, setCategoryName] = useState([]);
-  // const [categories, setCategories] = useState(null);
-  const {transactions} = useContext(DashboardContext)
-  const {categories} = useContext(DashboardContext)
-  const {categoryName} = useContext(DashboardContext)
-  const {addCategory} = useContext(DashboardContext)
-
-  // const getCategories = async (req, res) => {
-  //   try {
-  //     const res = await axios.get(`${apiUrl}/categories`);
-
-  //     console.log("categories", res.data);
-  //     setCategories(res.data.data);
-  //   } catch (error) {
-  //     console.error(error);
-  //     toast.error("Failed to fetch categories", error);
-  //   }
-  // };
-
-  // const addCategory = async (req, res) => {
-  //   try {
-  //     const res = await axios.post(
-  //       `${apiUrl}/categories`,
-  //       {
-  //         name: categoryName,
-  //       }
-  //       // {
-  //       //   headers: {
-  //       //     Authorization: `Bearer ${token}`,
-  //       //   },
-  //       // }
-  //     );
-  //     console.log("success add category");
-  //   } catch (error) {
-  //     console.log("error", error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   getCategories();
-  //   addCategory();
-  // }, []);
+  const { transactions } = useContext(DashboardContext);
+  const { categories } = useContext(DashboardContext);
+  const { categoryName } = useContext(DashboardContext);
+  const { addCategory } = useContext(DashboardContext);
   return (
     <>
-      <section className="flex justify-center gap-5 bg-slate-100  w-full h-full pb-8">
-        <section className="bg-white rounded flex flex-col gap-4 pt-4 px-4 mt-5 ml-12 w-[180px]">
+      <section className="flex justify-center gap-5 bg-slate-100  w-full  min-h-full pb-20">
+        <section className="bg-white rounded flex flex-col gap-4 pt-4 px-4 mt-5 ml-12 w-[180px] h-[600px] mb-8">
           <h3 className="text-sm font-bold">Records</h3>
           <input
             type="text"
             placeholder="Search"
             className="rounded pl-2 bg-slate-100 border text-xs"
           />
-          <RecordModal/>
+          <RecordModal />
           <div className="flex flex-col gap-3 text-gray-700">
             <h5 className="font-semibold text-xs">Types</h5>
             <ul className="text-[11px] font-normal pl-5">
@@ -109,10 +71,7 @@ const Records = ({}) => {
                 <h4>{ct?.name}</h4>
               </div>
             ))}
-            <CategoryModal/>
-              {/* // setCategoryName={setCategoryName}
-              // addCategory={addCategory}
-             */}
+            <CategoryModal />
           </div>
         </section>
         <section className="pt-5 w-[600px]">
@@ -130,29 +89,28 @@ const Records = ({}) => {
           </div>
           <p className="font-semibold pb-3 text-sm">Today</p>
           <section className="flex flex-col gap-2 ">
-          {transactions?.map((tr) => (
-          <section className="bg-white rounded  pt-3">
-            <div className="flex justify-between border-solid rounded-lg h-8 border-gray gap-2 pt-4 pb-4 ml-4">
-             
-                <div className="flex gap-3 items-center">
-                  <img className="h-6" src="./img/Home.png"></img>
-                  <div className="flex flex-col text-xs">
-                    <h4 className="font-normal">{tr.name}</h4>
-                    <p className="text-[9px] text-gray-500">14:00</p>
+            {transactions?.map((tr) => (
+              <section className="bg-white rounded  pt-3">
+                <div className="flex justify-between border-solid rounded-lg h-8 border-gray gap-2 pt-4 pb-4 ml-4">
+                  <div className="flex gap-3 items-center">
+                    <img className="h-6" src="./img/Home.png"></img>
+                    <div className="flex flex-col text-xs">
+                      <h4 className="font-normal">{tr.name}</h4>
+                      <p className="text-[9px] text-gray-500">14:00</p>
+                    </div>
                   </div>
+                  <span
+                    className={`pr-4  text-[11px] text-green-400 flex items-center ${
+                      tr.transaction_type === "EXP"
+                        ? "text-red-500"
+                        : "text-lime-500"
+                    }`}
+                  >
+                    {tr.amount}
+                  </span>
                 </div>
-                <span
-                  className={`pr-4  text-[11px] text-green-400 flex items-center ${
-                    tr.transaction_type === "EXP"
-                      ? "text-red-500"
-                      : "text-green-500"
-                  }`}
-                >
-                  {tr.amount}
-                </span>
-            </div>
-          </section>
-          ))}
+              </section>
+            ))}
           </section>
         </section>
       </section>
