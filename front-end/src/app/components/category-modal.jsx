@@ -8,7 +8,10 @@ export const CategoryModal = ({ children }) => {
   const { setCategoryName } = useContext(DashboardContext);
   const { addCategory } = useContext(DashboardContext);
   const [isOpen, setIsOpen] = useState(false);
-  const { handleClose } = useContext(DashboardContext);
+  const handleClose = () => {
+    setIsOpen(false);
+  };
+
   return (
     <>
       <button
