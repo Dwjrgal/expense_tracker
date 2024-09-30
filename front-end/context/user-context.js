@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext,useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import axios from "axios";
 import { apiUrl } from "@/utils/util";
 
@@ -32,10 +32,10 @@ export const UserProvider = ({ children }) => {
     }
   };
   useEffect(() => {
-    if(!user) {
+    if (!user) {
     }
     fetchUserData();
-  }, [ user ]);
+  }, [user]);
 
   return (
     <UserContext.Provider value={{ user, fetchUserData }}>
