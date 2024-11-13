@@ -15,14 +15,15 @@ const Records = ({}) => {
     useContext(DashboardContext);
   return (
     <>
-      <section className="flex justify-center gap-5 bg-slate-100  w-full h-full pb-8">
-        <section className="bg-white rounded flex flex-col gap-4 pt-4 px-4 mt-5 ml-12 w-[180px]">
+      <section className="flex justify-center gap-5 bg-slate-100  w-full  min-h-full pb-20">
+        <section className="bg-white rounded flex flex-col gap-4 pt-4 px-4 mt-5 ml-12 w-[180px] h-[600px] mb-8">
           <h3 className="text-sm font-bold">Records</h3>
           <input
             type="text"
             placeholder="Search"
             className="rounded pl-2 bg-slate-100 border text-xs"
           />
+          <RecordModal />
           <RecordModal />
           <div className="flex flex-col gap-3 text-gray-700">
             <h5 className="font-semibold text-xs">Types</h5>

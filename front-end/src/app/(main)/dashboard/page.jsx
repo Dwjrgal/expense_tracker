@@ -21,7 +21,7 @@ const Dashboard = () => {
 
   console.log("trasactions", transactions);
   return (
-    <section className="bg-slate-200 w-full pb-10 px-10 flex justify-center">
+    <section className="bg-slate-200 w-full min-h-full pt-5  pb-20 flex justify-center">
       <div className=" flex  gap-2 pt-5 flex-col">
         <div className="flex gap-2">
           <img src="./img/Card.png" alt="" className="w-[250px] h-36" />

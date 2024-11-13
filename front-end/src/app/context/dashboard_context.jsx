@@ -5,6 +5,7 @@ import axios from "axios";
 import { apiUrl } from "../utils/util";
 import { UserContext } from "./user-context";
 import { toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 export const DashboardContext = createContext();
 
@@ -13,6 +14,7 @@ export const DashboardProvider = ({ children }) => {
   const [transactions, setTransactions] = useState([]);
   const [categoryName, setCategoryName] = useState("");
   const [categories, setCategories] = useState(null);
+
   const [cardValue, setCardValue] = useState({});
 
   const handleClose = () => {
