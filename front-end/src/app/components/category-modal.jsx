@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { FaPlus } from "react-icons/fa6";
 
 export const CategoryModal = ({ setCategoryName, addCategory }) => {
@@ -31,12 +30,14 @@ export const CategoryModal = ({ setCategoryName, addCategory }) => {
               placeholder="name"
               onChange={(e) => setCategoryName(e.target.value)}
             />
-            <button
-              className="bg-lime-700 text-white rounded-lg text-xs w-45 h-6"
-              onClick={addCategory}
-            >
-              Add
-            </button>
+            <form method="dialog">
+              <button
+                className="bg-lime-700 text-white rounded-lg  w-40 text-xs w-45 h-6 hover:bg-slate-400 hover:text-black"
+                onClick={addCategory}
+              >
+                Add
+              </button>
+            </form>
           </div>
         </div>
       </dialog>

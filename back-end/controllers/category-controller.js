@@ -17,7 +17,9 @@ const createCategory = async (req, res) => {
     ${name}
     );`;
     console.log("DATA", data);
-    res.status(200).json({ message: "Create category success", user: data });
+    res
+      .status(200)
+      .json({ message: "Create category success", category: data });
   } catch (error) {
     console.log("eror", error);
     res.status(500).json({ message: "create category failed" });

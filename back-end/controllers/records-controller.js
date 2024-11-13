@@ -50,17 +50,17 @@ const createRecords = async (req, res) => {
       name,
       amount,
       transaction_type,
-      // description,
+      description,
       created_at = new Date(),
     } = req.body;
     const data = await sql`
     INSERT INTO records(uid, cid, name, amount, transaction_type,  created_at)
-    VALUES(${uid}, ${cid}, ${name}, ${amount}, ${transaction_type},${created_at});
+    VALUES(${uid}, ${cid}, ${name}, ${amount}, ${transaction_type},${description},${created_at});
     `;
     console.log("DATA", data);
     res.status(201).json({ message: "New record created successfully" });
   } catch (error) {
-    res.status(400).json({ message: "New record created unsuccessfully" });
+    res.status(500).json({ message: "New record created unsuccessfully" });
   }
 };
 const updateRecords = async (req, res) => {

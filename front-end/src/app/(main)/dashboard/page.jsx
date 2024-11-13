@@ -1,10 +1,6 @@
 "use client";
 
-import { useContext, useEffect, useState } from "react";
-import { UserContext } from "../../context/user-context";
-import axios from "axios";
-import { apiUrl } from "../../utils/util";
-import { toast } from "react-toastify";
+import { useContext } from "react";
 import { RxDotFilled } from "react-icons/rx";
 import { IoArrowUpCircleSharp, IoArrowDownCircleSharp } from "react-icons/io5";
 import BarChart from "@/app/components/dashboard/BarChart";
@@ -18,43 +14,14 @@ import {
 } from "chart.js";
 import DoughnurChart from "@/app/components/dashboard/Doughnut";
 import { DashboardContext } from "@/app/context/dashboard_context";
-import { CategoryModal } from "@/app/components";
-import RecordModal from "@/app/components/record-modal";
 Chart.register(CategoryScale, LinearScale, BarElement, ArcElement, Legend);
 
 const Dashboard = () => {
-  const { user } = useContext(UserContext);
-  const [transactions, setTransactions] = useState([]);
-  const [cardValue, setCardValue] = useState({});
-  const fetchTransactions = async () => {
-    try {
-      const res = await axios.get(`${apiUrl}/records`);
-      setTransactions(res.data.records);
-    } catch (error) {
-      console.error(error);
-      toast.error("Failed to fetch transactions");
-      console.log("error", error);
-    }
-  };
-
-  const getCardData = async () => {
-    try {
-      const res = await axios.get(`${apiUrl}/records/value`);
-      console.log("ST", res.data);
-      setCardValue(res.data);
-    } catch (error) {
-      console.error(error);
-      toast.error("Failed to fetch transactions");
-    }
-  };
-  useEffect(() => {
-    fetchTransactions();
-    getCardData();
-  }, [user]);
+  const { transactions, cardValue } = useContext(DashboardContext);
 
   console.log("trasactions", transactions);
   return (
-    <section className="bg-slate-200 w-full h-full px-10  pb-8 flex justify-center">
+    <section className="bg-slate-200 w-full pb-10 px-10 flex justify-center">
       <div className=" flex  gap-2 pt-5 flex-col">
         <div className="flex gap-2">
           <img src="./img/Card.png" alt="" className="w-[250px] h-36" />
@@ -62,7 +29,9 @@ const Dashboard = () => {
             <h4 className="border-b-[1px] border-gray-200 flex items-center gap-[1px] text-sm py-2 mb-2">
               <RxDotFilled className="text-sm text-green-500" /> Your income{" "}
             </h4>
-            <h2 className="text-xl font-semibold">{cardValue?.income?.sum}</h2>
+            <h2 className="text-xl font-semibold">
+              {cardValue?.income?.sum.toLocaleString()}
+            </h2>
             <p className="text-[9px] text-gray-500 font-normal">
               Your Income Amount{" "}
             </p>
@@ -78,7 +47,7 @@ const Dashboard = () => {
               Total expenses{" "}
             </h4>
             <h2 className="text-xl font-semibold">
-              -{cardValue?.expense?.sum}
+              -{cardValue?.expense?.sum.toLocaleString()}
             </h2>
             <p className="text-[9px] font-normal text-gray-500">
               Your Income Amount{" "}
@@ -103,7 +72,9 @@ const Dashboard = () => {
                   <img className="h-6" src="./img/Home.png"></img>
                   <div className="flex flex-col text-xs">
                     <h4 className="font-normal">{tr.name}</h4>
-                    <p className="text-[8px] text-gray-500">{tr.created_at}</p>
+                    <p className="text-[8px] text-gray-500">
+                      {new Date(tr.created_at).toLocaleDateString()}
+                    </p>
                   </div>
                 </div>
                 <span
@@ -113,7 +84,7 @@ const Dashboard = () => {
                       : "text-green-500"
                   }`}
                 >
-                  {tr.amount}
+                  {tr.amount.toLocaleString()}
                 </span>
               </div>
             ))}
