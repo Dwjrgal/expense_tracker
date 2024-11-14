@@ -15,15 +15,14 @@ const Records = ({}) => {
     useContext(DashboardContext);
   return (
     <>
-      <section className="flex justify-center gap-5 bg-slate-100  w-full  min-h-full pb-20">
-        <section className="bg-white rounded flex flex-col gap-4 pt-4 px-4 mt-5 ml-12 w-[180px] h-[600px] mb-8">
+      <section className="flex flex-col md:flex-row justify-center gap-3 md:gap-5 bg-slate-100 w-full min-h-screen p-4">
+        <section className="bg-white rounded flex flex-col gap-4 p-4 w-full md:w-[180px] h-auto md:h-[600px] mt-7">
           <h3 className="text-sm font-bold">Records</h3>
           <input
             type="text"
             placeholder="Search"
             className="rounded pl-2 bg-slate-100 border text-xs"
           />
-          <RecordModal />
           <RecordModal />
           <div className="flex flex-col gap-3 text-gray-700">
             <h5 className="font-semibold text-xs">Types</h5>
@@ -60,9 +59,12 @@ const Records = ({}) => {
             <h5 className="font-semibold text-[12px]">Category</h5>
             <p className="text-gray-500 text-[12px]">Clear</p>
           </div>
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col gap-1 max-h-[200px] md:max-h-none overflow-y-auto">
             {categories?.map((ct) => (
-              <div className="flex gap-3 items-center font-normal text-gray-700 ml-2 text-[11px]">
+              <div
+                key={ct.id}
+                className="flex gap-3 items-center font-normal text-gray-700 ml-2 text-[11px]"
+              >
                 <IoEye />
                 <h4>{ct?.name}</h4>
               </div>
@@ -73,29 +75,34 @@ const Records = ({}) => {
             />
           </div>
         </section>
-        <section className="pt-5 w-[600px]">
-          <div className="flex justify-between gap-28">
-            <h5 className="flex items-center gap-2 md:font-semibold md:mb-5 mb-3 text-xs md:text-sm">
-              {" "}
-              <button className="w-4 h-4 bg-slate-200 text-[8px] pl-1 rounded-md">
-                <SlArrowLeft className="font-bold" />
+        <section className="pt-5 w-full md:w-[600px]">
+          <div className="flex flex-col sm:flex-row sm:justify-between gap-3 sm:gap-28 mb-4">
+            <h5 className="flex items-center gap-2 text-xs md:text-sm">
+              <button className="w-6 h-6 md:w-4 md:h-4 bg-slate-200 flex items-center justify-center rounded-md">
+                <SlArrowLeft className="text-xs" />
               </button>
               <p className="text-xs font-normal">Last 30 Days</p>
-              <button className="w-4 h-4 bg-slate-200 text-[8px] pl-1 rounded-md">
-                <SlArrowRight />
-              </button>{" "}
+              <button className="w-6 h-6 md:w-4 md:h-4 bg-slate-200 flex items-center justify-center rounded-md">
+                <SlArrowRight className="text-xs" />
+              </button>
             </h5>
           </div>
           <p className="font-semibold pb-3 text-sm">Today</p>
-          <section className="flex flex-col gap-2 ">
+          <section className="flex flex-col gap-2">
             {transactions?.map((tr) => (
-              <section className="bg-white rounded  pt-3">
-                <div className="flex justify-between border-solid rounded-lg h-8 border-gray gap-2 pt-4 pb-4 ml-4">
+              <section key={tr.id} className="bg-white rounded pt-3">
+                <div className="flex justify-between items-center px-4 py-2">
                   <div className="flex gap-3 items-center">
-                    <img className="h-6" src="./img/Home.png"></img>
+                    <img
+                      className="h-6 w-6"
+                      src="./img/Home.png"
+                      alt="Category"
+                    />
                     <div className="flex flex-col text-xs">
                       <h4 className="font-normal">{tr.name}</h4>
-                      <p className="text-[9px] text-gray-500">14:00</p>
+                      <p className="text-[9px] text-gray-500">
+                        {new Date(tr.created_at).toLocaleTimeString()}
+                      </p>
                     </div>
                   </div>
                   <span

@@ -60,6 +60,7 @@ const createRecords = async (req, res) => {
     console.log("DATA", data);
     res.status(201).json({ message: "New record created successfully" });
   } catch (error) {
+    console.error(error);
     res.status(500).json({ message: "New record created unsuccessfully" });
   }
 };

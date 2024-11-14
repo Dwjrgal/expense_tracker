@@ -13,7 +13,7 @@ const signUp = async (req, res) => {
     console.log("DATA", data);
     res.status(201).json({ message: "New user registered successfully" });
   } catch (error) {
-    res.status(400).json({ message: " Client error" });
+    res.status(400).json({ message: "Failed to sign up" });
   }
 };
 

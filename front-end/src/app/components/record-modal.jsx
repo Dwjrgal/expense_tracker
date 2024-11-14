@@ -12,13 +12,6 @@ const RecordModal = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <>
-      <button
-        className=" w-[150px] h-5 bg-blue-600 text-white rounded-xl  flex justify-center items-center gap-1 text-xs"
-        onClick={() => setIsOpen(true)}
-      >
-        <PiPlusThin className="text-white text-lg" />
-        Add
-      </button>
       <dialog open={isOpen} className="modal">
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
           <div className="modal-box max-w-[800px]">
@@ -32,7 +25,6 @@ const RecordModal = ({ children }) => {
             <div className="divider"></div>
             <div className="flex gap-12">
               <RightSide categories={categories} />
-              <LeftSide />
             </div>
           </div>
         </div>
@@ -70,10 +62,11 @@ export const RightSide = ({ categories }) => {
   const { user } = useContext(UserContext);
 
   const [recordFormData, setRecordFormData] = useState({
+    uid: "e62b83f2-2eca-4f53-89df-f12cb268db6a",
+    cid: "",
     name: "",
     amount: 0,
-    cid: "",
-    uid: user.id,
+    transaction_type: "",
     description: "",
   });
 
@@ -102,6 +95,7 @@ export const RightSide = ({ categories }) => {
       toast.error("Record nemeh uyd aldaa garlaa");
     }
   };
+  console.log("recordform data", recordFormData);
   return (
     <div className="w-2/5">
       <section className="flex gap-10">

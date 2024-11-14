@@ -9,7 +9,9 @@ export const Header = () => {
   return (
     <header className="flex items-center max-w-5xl mx-auto justify-between py-4 border-b-[1px]  w-[820px]">
       <div className="flex gap-6 items-center">
-        <img src="./img/Header_logo.png" width={28} height={28} alt="logo" />
+        <Link href="/">
+          <img src="./img/Header_logo.png" width={28} height={28} alt="logo" />
+        </Link>
         <Link href="/dashboard">
           <p className="font-semibold text-sm">Dashboard</p>
         </Link>

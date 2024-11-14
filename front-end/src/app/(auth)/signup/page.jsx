@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import axios from "axios";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -67,8 +66,8 @@ const SignUp = () => {
   };
   return (
     <>
-      <section className="flex justify-between">
-        <section className="mx-auto my-40">
+      <section className="flex justify-between h-svh">
+        <section className="mx-auto my-auto flex-1">
           <div className="mb-3 flex flex-col items-center gap-1">
             <img src="./img/GELD.png" alt="" className="h-5 mb-3" />
             <h4 className="font-bold text-center text-black">
@@ -131,7 +130,7 @@ const SignUp = () => {
             </div>
           </div>
         </section>
-        <section className="bg-blue-600 w-[600px] h-[900px]"></section>
+        <section className="bg-blue-600 flex-1 w-[50%]"></section>
       </section>
     </>
   );

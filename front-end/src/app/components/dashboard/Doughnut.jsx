@@ -60,8 +60,8 @@ const DoughnurChart = () => {
   console.log("donutValue", donutValue);
 
   return (
-    <div className="flex items-center justify-center p-4  bg-white card">
-      <div className="h-40 w-[360px]">
+    <div className="flex items-center justify-center p-4 bg-white card">
+      <div className="w-[360px]">
         <div className="flex justify-between border-b-[1px] px-4">
           <p className="text-xs">Income-Expense </p>
           <p className="text-[10px] text-gray-600">Jun-1 Nov-30</p>

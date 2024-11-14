@@ -43,8 +43,8 @@ const LogIn = () => {
   if (isLoading) return <Loader />;
 
   return (
-    <section className="flex justify-between bg-white">
-      <section className="my-44 mx-auto w-52">
+    <section className="flex justify-between bg-white h-svh">
+      <section className="mx-auto w-52 flex-1 my-auto">
         <div className="flex flex-col gap-4 text-xs">
           <div className="mb-3 flex flex-col items-center gap-1">
             <img src="./img/GELD.png" alt="" className="h-5 mb-3" />
@@ -53,7 +53,7 @@ const LogIn = () => {
               Welcome back, Please enter your details
             </p>
           </div>
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2 w-60 mx-auto">
             <input
               type="text"
               placeholder="Email"
@@ -72,7 +72,7 @@ const LogIn = () => {
             />
           </div>
           <button
-            className="bg-blue-600 rounded-xl text-white h-7"
+            className="bg-blue-600 rounded-xl text-white h-7 w-60 mx-auto"
             onClick={logIn}
           >
             Log in
@@ -87,7 +87,7 @@ const LogIn = () => {
           </div>
         </div>
       </section>
-      <section className="bg-blue-600 w-[600px] h-[1024px]"></section>
+      <section className="bg-blue-600 w-[50%] flex-1"></section>
     </section>
   );
 };
