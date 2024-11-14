@@ -5,7 +5,6 @@ import axios from "axios";
 import { apiUrl } from "../utils/util";
 import { UserContext } from "./user-context";
 import { toast } from "react-toastify";
-import { toast } from "react-toastify";
 
 export const DashboardContext = createContext();
 
